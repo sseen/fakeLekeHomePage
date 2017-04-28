@@ -73,6 +73,30 @@
     
     NSLog(@"%f", offset);
     
+    if ([scrollView isEqual:_mainTable]) {
+        
+        switch (scrollView.panGestureRecognizer.state) {
+                
+            case UIGestureRecognizerStateBegan:
+                
+                // User began dragging
+                break;
+                
+            case UIGestureRecognizerStateChanged:
+                
+                // User is currently dragging the scroll view
+                break;
+                
+            case UIGestureRecognizerStatePossible:
+                
+                // The scroll view scrolling but the user is no longer touching the scrollview (table is decelerating)
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView {
@@ -82,8 +106,9 @@
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     if (scrollView.contentOffset.y > self.lastOffsetY) {
         scrollView.contentOffset = CGPointMake(0, 100);
-        
+        scrollView.panGestureRecognizer.enabled = NO;
     }
 }
+
 
 @end
