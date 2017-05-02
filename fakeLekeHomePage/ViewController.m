@@ -12,6 +12,10 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (assign, nonatomic) CGFloat lastOffsetY ;
+@property (strong, nonatomic) UIView *headerView;
+
+@property (assign, nonatomic) Boolean isUp;
+@property (assign, nonatomic) Boolean velocity;
 @end
 
 @implementation ViewController
@@ -19,12 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 100)];
-    view.backgroundColor = [UIColor lightGrayColor];
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, CGRectGetWidth(self.view.frame), 100)];
+    _headerView.backgroundColor = [UIColor lightGrayColor];
     
     [_mainTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell0"];
     _mainTable.decelerationRate = UIScrollViewDecelerationRateFast;
-    _mainTable.tableHeaderView = view;
+    [self.view addSubview: _headerView];
 }
 
 
@@ -73,25 +77,45 @@
     
     NSLog(@"%f", offset);
     
+    if (scrollView.contentOffset.y<_lastOffsetY) {
+        NSLog(@"down");
+    } else if (scrollView.contentOffset.y>_lastOffsetY) {
+        NSLog(@"up");
+    }
+    
+//    CGFloat velocityY = [scrollView.panGestureRecognizer  velocityInView:self.view].y;
+//    NSLog(@"ss %f",velocityY);
+//    self.velocity = velocityY > 0 ? true : false;
+    
     if ([scrollView isEqual:_mainTable]) {
         
         switch (scrollView.panGestureRecognizer.state) {
                 
-            case UIGestureRecognizerStateBegan:
-                
+            case UIGestureRecognizerStateBegan: {
+                CGFloat velocityY = [scrollView.panGestureRecognizer  velocityInView:self.view].y;
+                NSLog(@"ss %f",velocityY);
+                self.velocity = velocityY < 0 ? true : false;
+                [[scrollView delegate] scrollViewDidEndDecelerating:scrollView];
                 // User began dragging
                 break;
-                
+            }
             case UIGestureRecognizerStateChanged:
                 
                 // User is currently dragging the scroll view
                 break;
                 
-            case UIGestureRecognizerStatePossible:
+            case UIGestureRecognizerStatePossible: {
                 
                 // The scroll view scrolling but the user is no longer touching the scrollview (table is decelerating)
                 break;
+            }
+            case UIGestureRecognizerStateEnded: {
                 
+                
+                
+                break;
+            }
+            
             default:
                 break;
         }
@@ -101,13 +125,29 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView {
     self.lastOffsetY = scrollView.contentOffset.y;
+    
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    if (scrollView.contentOffset.y > self.lastOffsetY) {
-        scrollView.contentOffset = CGPointMake(0, 100);
-        scrollView.panGestureRecognizer.enabled = NO;
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    if (_isUp && !_velocity) {// header disappear will show
+        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            _headerView.frame = CGRectMake(0, 64, CGRectGetWidth(_headerView.frame), CGRectGetHeight(_headerView.frame));
+            scrollView.frame = CGRectMake(0, 164, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
+        } completion:nil];
+        
+        _isUp = !_isUp;
+
     }
+    if (!_isUp && _velocity) {// header show will hide
+        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            _headerView.frame = CGRectMake(0, -36, CGRectGetWidth(_headerView.frame), CGRectGetHeight(_headerView.frame));
+            scrollView.frame = CGRectMake(0, 0, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
+        } completion:nil];
+        
+        _isUp = !_isUp;
+    }
+    
 }
 
 
