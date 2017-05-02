@@ -11,7 +11,6 @@
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource,  UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
-@property (assign, nonatomic) CGFloat lastOffsetY ;
 @property (strong, nonatomic) UIView *headerView;
 
 @property (assign, nonatomic) Boolean isUp;
@@ -77,16 +76,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat offset = scrollView.contentOffset.y ;
-    
     NSLog(@"%f, %ld", offset, (long)scrollView.panGestureRecognizer.state);
-    
-//    if (scrollView.contentOffset.y<_lastOffsetY) {
-//        NSLog(@"down");
-//    } else if (scrollView.contentOffset.y>_lastOffsetY) {
-//        NSLog(@"up");
-//    }
-    
-    
     
     if ([scrollView isEqual:_mainTable]) {
         
@@ -130,11 +120,6 @@
                 break;
         }
     }
-    
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView {
-    self.lastOffsetY = scrollView.contentOffset.y;
     
 }
 
