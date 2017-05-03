@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "BannerCollectionReusableView.h"
 #import "UINavigationBar+Awesome.h"
+#import "ChildViewController.h"
 
 typedef NS_ENUM(NSInteger, HomeHeaderState) {
     HomeHeaderStateHided,
@@ -18,8 +19,9 @@ typedef NS_ENUM(NSInteger, HomeHeaderState) {
 
 float marginItem = 20;
 float navPlusStatus = 64;
-float animationTime = 0.4;
+float animationTime = 0.33;
 float bannerHeight = 150;
+#define color  [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 #define NAVBAR_CHANGE_POINT 50
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -59,6 +61,7 @@ float bannerHeight = 150;
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
     layout.headerReferenceSize = CGSizeMake(_screenWidth, bannerHeight);
     self.mainCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, _screenWidth, bannerHeight * 2 ) collectionViewLayout:layout];
+    _mainCollection.backgroundColor = color;
     [_mainCollection setDataSource:self];
     [_mainCollection setDelegate:self];
     [_mainCollection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
@@ -72,19 +75,21 @@ float bannerHeight = 150;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self scrollViewDidScroll:_mainTable];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    float headerHeight = headerHeight;
-    _mainTable.frame = CGRectMake(0, headerHeight, _screenWidth, _screenHeight - navPlusStatus);
+    // float headerHeight = CGRectGetHeight(_headerViewDel.frame);
+    // _mainTable.frame = CGRectMake(0, headerHeight, _screenWidth, _screenHeight - navPlusStatus);
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
+    [self.navigationController.navigationBar lt_reset];
 }
 
 
@@ -197,6 +202,14 @@ float bannerHeight = 150;
     return contentView;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIStoryboard *sboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChildViewController *vc = [sboard instantiateViewControllerWithIdentifier:@"ChildViewController"];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
 #pragma mark - scroll
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -236,8 +249,11 @@ float bannerHeight = 150;
                 break;
             }
             
-            default:
+            default: {
+                
                 break;
+            }
+                
         }
     }
     
@@ -261,7 +277,6 @@ float bannerHeight = 150;
                 _mainTable.frame = CGRectMake(0, headerHeight, _screenWidth, tableHeight);
             } completion:nil];
             
-            UIColor * color = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1];
             [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0]];
             
             _isUp = HomeHeaderStateShowing;
@@ -281,7 +296,6 @@ float bannerHeight = 150;
             _headerViewDel.frame = CGRectMake(0, navPlusStatus - headerHeight , _screenWidth, headerHeight);
             _mainTable.frame = CGRectMake(0, navPlusStatus, _screenWidth, tableHeight);
             
-            UIColor * color = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1];
             [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:1]];
             
         } completion:nil];
