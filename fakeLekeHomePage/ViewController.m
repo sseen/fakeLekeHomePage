@@ -78,7 +78,7 @@ float bannerHeight = 150;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    float headerHeight = CGRectGetHeight(_headerViewDel.frame);
+    float headerHeight = headerHeight;
     _mainTable.frame = CGRectMake(0, headerHeight, _screenWidth, _screenHeight - navPlusStatus);
 }
 
@@ -249,12 +249,16 @@ float bannerHeight = 150;
     // velocity : because 主动调用 scrollViewDidEndDecelerating 后，scrollview 还会在滑动结束后自己调用一次，加上加速度代表是主动调用
     // velocity negative imply up, active down
     NSLog(@"%ld, %d, %f", (long)_isUp, _velocity, scrollView.contentOffset.y);
+    
+    float headerHeight = CGRectGetHeight(_headerViewDel.frame);
+    float tableHeight  = CGRectGetHeight(scrollView.frame);
+    
     if (_isUp!=HomeHeaderStateShowing && !_velocity) {// scroll up, header disappear will show
         if ( scrollView.contentOffset.y<10) {
             
             [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                _headerViewDel.frame = CGRectMake(0, 0, CGRectGetWidth(_headerViewDel.frame), CGRectGetHeight(_headerViewDel.frame));
-                _mainTable.frame = CGRectMake(0, CGRectGetHeight(_headerViewDel.frame), CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
+                _headerViewDel.frame = CGRectMake(0, 0, _screenWidth, headerHeight);
+                _mainTable.frame = CGRectMake(0, headerHeight, _screenWidth, tableHeight);
             } completion:nil];
             
             UIColor * color = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1];
@@ -263,18 +267,19 @@ float bannerHeight = 150;
             _isUp = HomeHeaderStateShowing;
         } else {
             [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                _headerViewDel.frame = CGRectMake(0, navPlusStatus - bannerHeight, CGRectGetWidth(_headerViewDel.frame), CGRectGetHeight(_headerViewDel.frame));
-                _mainTable.frame = CGRectMake(0, navPlusStatus + _mainCollection.contentSize.height -  bannerHeight, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
+                _headerViewDel.frame = CGRectMake(0, navPlusStatus - bannerHeight, _screenWidth, headerHeight);
+                _mainTable.frame = CGRectMake(0, navPlusStatus + headerHeight -  bannerHeight, _screenWidth, tableHeight);
             } completion:nil];
             
             _isUp = HomeHeaderStatePartial;
         }
 
     }
+    
     if (_velocity) {//scroll down, header show will hide
         [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-            _headerViewDel.frame = CGRectMake(0, navPlusStatus - CGRectGetHeight(_headerViewDel.frame) , CGRectGetWidth(_headerViewDel.frame), CGRectGetHeight(_headerViewDel.frame));
-            _mainTable.frame = CGRectMake(0, navPlusStatus, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
+            _headerViewDel.frame = CGRectMake(0, navPlusStatus - headerHeight , _screenWidth, headerHeight);
+            _mainTable.frame = CGRectMake(0, navPlusStatus, _screenWidth, tableHeight);
             
             UIColor * color = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1];
             [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:1]];
@@ -283,11 +288,9 @@ float bannerHeight = 150;
         
         if (_isUp==HomeHeaderStateShowing) {
             _isUp = HomeHeaderStateHided;
-            
         }
     }
     
 }
-
 
 @end
