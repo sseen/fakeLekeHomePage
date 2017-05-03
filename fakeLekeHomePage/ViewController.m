@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "BannerCollectionReusableView.h"
+#import "UINavigationBar+Awesome.h"
 
 typedef NS_ENUM(NSInteger, HomeHeaderState) {
     HomeHeaderStateHided,
@@ -16,6 +17,10 @@ typedef NS_ENUM(NSInteger, HomeHeaderState) {
 };
 
 float marginItem = 20;
+float navPlusStatus = 64;
+float animationTime = 0.4;
+float bannerHeight = 150;
+#define NAVBAR_CHANGE_POINT 50
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -25,8 +30,9 @@ float marginItem = 20;
 
 @property (assign, nonatomic) HomeHeaderState isUp; // -1:hide 0:part of show 1:all show
 @property (assign, nonatomic) Boolean velocity;
+
 @property (assign, nonatomic) CGFloat screenWidth;
-@property (assign, nonatomic) CGFloat bannerHeight;
+@property (assign, nonatomic) CGFloat screenHeight;
 @end
 
 @implementation ViewController
@@ -36,15 +42,12 @@ float marginItem = 20;
     // Do any additional setup after loading the view, typically from a nib.
     
     // self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
     _isUp = 1;
-    _bannerHeight = 100;
     _screenWidth = CGRectGetWidth(self.view.frame);
+    _screenHeight = CGRectGetHeight(self.view.frame);
 
     
     // table
@@ -54,8 +57,8 @@ float marginItem = 20;
 
     // collection
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
-    layout.headerReferenceSize = CGSizeMake(_screenWidth, 100.f);
-    self.mainCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, _screenWidth, 100 + 150) collectionViewLayout:layout];
+    layout.headerReferenceSize = CGSizeMake(_screenWidth, bannerHeight);
+    self.mainCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, _screenWidth, bannerHeight * 2 ) collectionViewLayout:layout];
     [_mainCollection setDataSource:self];
     [_mainCollection setDelegate:self];
     [_mainCollection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
@@ -64,6 +67,24 @@ float marginItem = 20;
     
     
     self.headerViewDel = _mainCollection;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    float headerHeight = CGRectGetHeight(_headerViewDel.frame);
+    _mainTable.frame = CGRectMake(0, headerHeight, _screenWidth, _screenHeight - navPlusStatus);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
 }
 
 
@@ -180,9 +201,6 @@ float marginItem = 20;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    self.navigationController.navigationBar.alpha = 1 - (_mainTable.contentOffset.y / (_mainTable.contentSize.height - _mainTable.frame.size.height));
-
-    
     CGFloat offset = scrollView.contentOffset.y ;
     NSLog(@"%f, %ld", offset, (long)scrollView.panGestureRecognizer.state);
     
@@ -191,10 +209,6 @@ float marginItem = 20;
         switch (scrollView.panGestureRecognizer.state) {
                 
             case UIGestureRecognizerStateBegan: {
-                //CGFloat velocityY = [scrollView.panGestureRecognizer  velocityInView:self.view].y;
-                //NSLog(@"ss %f",velocityY);
-                //self.velocity = velocityY < 0 ? true : false;
-                //[[scrollView delegate] scrollViewDidEndDecelerating:scrollView];
                 
                 // User began dragging
                 break;
@@ -238,16 +252,19 @@ float marginItem = 20;
     if (_isUp!=HomeHeaderStateShowing && !_velocity) {// scroll up, header disappear will show
         if ( scrollView.contentOffset.y<10) {
             
-            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
                 _headerViewDel.frame = CGRectMake(0, 0, CGRectGetWidth(_headerViewDel.frame), CGRectGetHeight(_headerViewDel.frame));
                 _mainTable.frame = CGRectMake(0, CGRectGetHeight(_headerViewDel.frame), CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
             } completion:nil];
             
+            UIColor * color = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1];
+            [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0]];
+            
             _isUp = HomeHeaderStateShowing;
         } else {
-            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                _headerViewDel.frame = CGRectMake(0, - _bannerHeight, CGRectGetWidth(_headerViewDel.frame), CGRectGetHeight(_headerViewDel.frame));
-                _mainTable.frame = CGRectMake(0, _mainCollection.contentSize.height -  _bannerHeight, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
+            [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+                _headerViewDel.frame = CGRectMake(0, navPlusStatus - bannerHeight, CGRectGetWidth(_headerViewDel.frame), CGRectGetHeight(_headerViewDel.frame));
+                _mainTable.frame = CGRectMake(0, navPlusStatus + _mainCollection.contentSize.height -  bannerHeight, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
             } completion:nil];
             
             _isUp = HomeHeaderStatePartial;
@@ -255,13 +272,18 @@ float marginItem = 20;
 
     }
     if (_velocity) {//scroll down, header show will hide
-        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-            _headerViewDel.frame = CGRectMake(0, - CGRectGetHeight(_headerViewDel.frame) , CGRectGetWidth(_headerViewDel.frame), CGRectGetHeight(_headerViewDel.frame));
-            _mainTable.frame = CGRectMake(0, 0, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
+        [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            _headerViewDel.frame = CGRectMake(0, navPlusStatus - CGRectGetHeight(_headerViewDel.frame) , CGRectGetWidth(_headerViewDel.frame), CGRectGetHeight(_headerViewDel.frame));
+            _mainTable.frame = CGRectMake(0, navPlusStatus, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));
+            
+            UIColor * color = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1];
+            [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:1]];
+            
         } completion:nil];
         
         if (_isUp==HomeHeaderStateShowing) {
             _isUp = HomeHeaderStateHided;
+            
         }
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		92ACD24C1EB98A0E00AA6FBA /* BannerCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACD24B1EB98A0E00AA6FBA /* BannerCollectionReusableView.m */; };
+		92ACD24F1EB9C18600AA6FBA /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACD24E1EB9C18600AA6FBA /* UINavigationBar+Awesome.m */; };
 		92F27C6B1EB32DD300D98CA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F27C6A1EB32DD300D98CA8 /* main.m */; };
 		92F27C6E1EB32DD300D98CA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F27C6D1EB32DD300D98CA8 /* AppDelegate.m */; };
 		92F27C711EB32DD300D98CA8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F27C701EB32DD300D98CA8 /* ViewController.m */; };
@@ -19,6 +20,8 @@
 /* Begin PBXFileReference section */
 		92ACD24A1EB98A0E00AA6FBA /* BannerCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerCollectionReusableView.h; sourceTree = "<group>"; };
 		92ACD24B1EB98A0E00AA6FBA /* BannerCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerCollectionReusableView.m; sourceTree = "<group>"; };
+		92ACD24D1EB9C18600AA6FBA /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
+		92ACD24E1EB9C18600AA6FBA /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		92F27C661EB32DD300D98CA8 /* fakeLekeHomePage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fakeLekeHomePage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F27C6A1EB32DD300D98CA8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92F27C6C1EB32DD300D98CA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,6 +64,8 @@
 		92F27C681EB32DD300D98CA8 /* fakeLekeHomePage */ = {
 			isa = PBXGroup;
 			children = (
+				92ACD24D1EB9C18600AA6FBA /* UINavigationBar+Awesome.h */,
+				92ACD24E1EB9C18600AA6FBA /* UINavigationBar+Awesome.m */,
 				92F27C6C1EB32DD300D98CA8 /* AppDelegate.h */,
 				92F27C6D1EB32DD300D98CA8 /* AppDelegate.m */,
 				92F27C6F1EB32DD300D98CA8 /* ViewController.h */,
@@ -160,6 +165,7 @@
 				92ACD24C1EB98A0E00AA6FBA /* BannerCollectionReusableView.m in Sources */,
 				92F27C6E1EB32DD300D98CA8 /* AppDelegate.m in Sources */,
 				92F27C6B1EB32DD300D98CA8 /* main.m in Sources */,
+				92ACD24F1EB9C18600AA6FBA /* UINavigationBar+Awesome.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
