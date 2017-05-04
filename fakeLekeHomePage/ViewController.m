@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderState) {
 float marginItem = 20;
 float navPlusStatus = 64;
 float animationTime = 0.33;
-float delayTime = 0.2;
+float delayTime = 0.1;
 float bannerHeight = 150;
 #define color  [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 #define NAVBAR_CHANGE_POINT 50
@@ -36,6 +36,8 @@ float bannerHeight = 150;
 
 @property (assign, nonatomic) CGFloat screenWidth;
 @property (assign, nonatomic) CGFloat screenHeight;
+@property (assign, nonatomic) CGFloat upMoveOffset;
+
 @end
 
 @implementation ViewController
@@ -49,6 +51,7 @@ float bannerHeight = 150;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
     _isUp = 1;
+    _upMoveOffset = 0;
     _screenWidth = CGRectGetWidth(self.view.frame);
     _screenHeight = CGRectGetHeight(self.view.frame);
 
@@ -195,9 +198,8 @@ float bannerHeight = 150;
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40)];
     UILabel *lblName = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
-    lblName.textColor = [UIColor purpleColor];
+    lblName.textColor = [UIColor darkGrayColor];
     lblName.text = @"title";
-    contentView.backgroundColor = [UIColor cyanColor];
     [contentView addSubview:lblName];
     
     return contentView;
@@ -267,6 +269,7 @@ float bannerHeight = 150;
     // velocity negative imply up, active down
     NSLog(@"%ld, %d, %f", (long)_isUp, _velocity, scrollView.contentOffset.y);
     
+    float yOffset = scrollView.contentOffset.y;
     float headerHeight = CGRectGetHeight(_headerViewDel.frame);
     float tableHeight  = CGRectGetHeight(scrollView.frame);
     
@@ -281,18 +284,27 @@ float bannerHeight = 150;
             [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0]];
             
             _isUp = HomeHeaderStateShowing;
-        } else {
-            [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
-                _headerViewDel.frame = CGRectMake(0, navPlusStatus - bannerHeight, _screenWidth, headerHeight);
-                _mainTable.frame = CGRectMake(0, navPlusStatus + headerHeight -  bannerHeight, _screenWidth, tableHeight);
-            } completion:nil];
+        } else { // partial show
+            if (_upMoveOffset < yOffset) {
+                _upMoveOffset = yOffset;
+            }
             
-            _isUp = HomeHeaderStatePartial;
+            if (_upMoveOffset - yOffset > 40*1.5) {
+                [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
+                    _headerViewDel.frame = CGRectMake(0, navPlusStatus - bannerHeight, _screenWidth, headerHeight);
+                    _mainTable.frame = CGRectMake(0, navPlusStatus + headerHeight -  bannerHeight, _screenWidth, tableHeight);
+                } completion:nil];
+                
+                _upMoveOffset = yOffset;
+                
+                _isUp = HomeHeaderStatePartial;
+            }
+            
         }
 
     }
     
-    if (_velocity) {//scroll down, header show will hide
+    if (_velocity && yOffset > 10) {//scroll down, header show will hide
         [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
             _headerViewDel.frame = CGRectMake(0, navPlusStatus - headerHeight , _screenWidth, headerHeight);
             _mainTable.frame = CGRectMake(0, navPlusStatus, _screenWidth, tableHeight);
