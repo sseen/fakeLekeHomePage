@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderState) {
 float marginItem = 20;
 float navPlusStatus = 64;
 float animationTime = 0.33;
+float delayTime = 0.2;
 float bannerHeight = 150;
 #define color  [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 #define NAVBAR_CHANGE_POINT 50
@@ -272,7 +273,7 @@ float bannerHeight = 150;
     if (_isUp!=HomeHeaderStateShowing && !_velocity) {// scroll up, header disappear will show
         if ( scrollView.contentOffset.y<10) {
             
-            [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
                 _headerViewDel.frame = CGRectMake(0, 0, _screenWidth, headerHeight);
                 _mainTable.frame = CGRectMake(0, headerHeight, _screenWidth, tableHeight);
             } completion:nil];
@@ -281,7 +282,7 @@ float bannerHeight = 150;
             
             _isUp = HomeHeaderStateShowing;
         } else {
-            [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
                 _headerViewDel.frame = CGRectMake(0, navPlusStatus - bannerHeight, _screenWidth, headerHeight);
                 _mainTable.frame = CGRectMake(0, navPlusStatus + headerHeight -  bannerHeight, _screenWidth, tableHeight);
             } completion:nil];
@@ -292,7 +293,7 @@ float bannerHeight = 150;
     }
     
     if (_velocity) {//scroll down, header show will hide
-        [UIView animateWithDuration:animationTime delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
             _headerViewDel.frame = CGRectMake(0, navPlusStatus - headerHeight , _screenWidth, headerHeight);
             _mainTable.frame = CGRectMake(0, navPlusStatus, _screenWidth, tableHeight);
             
