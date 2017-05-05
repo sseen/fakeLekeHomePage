@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderState) {
 float marginItem = 20;
 float navPlusStatus = 64;
 float animationTime = 0.33;
-float delayTime = 0.1;
+float delayTime = 0;
 float bannerHeight = 150;
 #define color  [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 #define NAVBAR_CHANGE_POINT 50
@@ -46,6 +46,7 @@ float bannerHeight = 150;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    
     // self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
@@ -55,7 +56,6 @@ float bannerHeight = 150;
     _screenWidth = CGRectGetWidth(self.view.frame);
     _screenHeight = CGRectGetHeight(self.view.frame);
 
-    
     // table
     [_mainTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell0"];
     _mainTable.decelerationRate = UIScrollViewDecelerationRateFast;
@@ -65,13 +65,12 @@ float bannerHeight = 150;
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
     layout.headerReferenceSize = CGSizeMake(_screenWidth, bannerHeight);
     self.mainCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, _screenWidth, bannerHeight * 2 ) collectionViewLayout:layout];
-    _mainCollection.backgroundColor = color;
+    _mainCollection.backgroundColor = [UIColor whiteColor];
     [_mainCollection setDataSource:self];
     [_mainCollection setDelegate:self];
     [_mainCollection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     [_mainCollection registerClass:[BannerCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     [self.view addSubview:_mainCollection];
-    
     
     self.headerViewDel = _mainCollection;
 }
@@ -79,7 +78,7 @@ float bannerHeight = 150;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self scrollViewDidScroll:_mainTable];
+    // [self scrollViewDidScroll:_mainTable];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
 
@@ -218,7 +217,10 @@ float bannerHeight = 150;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat offset = scrollView.contentOffset.y ;
-    NSLog(@"%f, %ld", offset, (long)scrollView.panGestureRecognizer.state);
+    CGFloat velocityY = [scrollView.panGestureRecognizer  velocityInView:self.view].y;
+    NSLog(@"%f, %ld, %f", offset, (long)scrollView.panGestureRecognizer.state, velocityY);
+    
+    self.velocity = velocityY < 0 ? true : false;
     
     if ([scrollView isEqual:_mainTable]) {
         
@@ -226,13 +228,13 @@ float bannerHeight = 150;
                 
             case UIGestureRecognizerStateBegan: {
                 
+                [[scrollView delegate] scrollViewDidEndDecelerating:scrollView];
+                
                 // User began dragging
                 break;
             }
             case UIGestureRecognizerStateChanged: {
-                CGFloat velocityY = [scrollView.panGestureRecognizer  velocityInView:self.view].y;
-                NSLog(@"ss %f",velocityY);
-                self.velocity = velocityY < 0 ? true : false;
+                
                 [[scrollView delegate] scrollViewDidEndDecelerating:scrollView];
                 
                 // User is currently dragging the scroll view
@@ -284,7 +286,10 @@ float bannerHeight = 150;
             [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0]];
             
             _isUp = HomeHeaderStateShowing;
-        } else { // partial show
+        }
+        else { // partial show
+            
+            // 向上滚动到一定距离的时候才 animation
             if (_upMoveOffset < yOffset) {
                 _upMoveOffset = yOffset;
             }
@@ -292,7 +297,7 @@ float bannerHeight = 150;
             if (_upMoveOffset - yOffset > 40*1.5) {
                 [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
                     _headerViewDel.frame = CGRectMake(0, navPlusStatus - bannerHeight, _screenWidth, headerHeight);
-                    _mainTable.frame = CGRectMake(0, navPlusStatus + headerHeight -  bannerHeight, _screenWidth, tableHeight);
+                    _mainTable.frame = CGRectMake(0, navPlusStatus + headerHeight -  bannerHeight, _screenWidth, tableHeight );
                 } completion:nil];
                 
                 _upMoveOffset = yOffset;

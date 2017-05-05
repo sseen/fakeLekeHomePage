@@ -8,13 +8,16 @@
 
 #import "BannerCollectionReusableView.h"
 
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+
 @implementation BannerCollectionReusableView
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     if (self) {
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
         imgView.image = [UIImage imageNamed:@"banner"];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         
