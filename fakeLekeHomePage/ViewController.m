@@ -17,11 +17,11 @@ typedef NS_ENUM(NSInteger, HomeHeaderState) {
     HomeHeaderStatePartial
 };
 
-float marginItem = 20;
-float navPlusStatus = 64;
-float animationTime = 0.33;
-float delayTime = 0;
-float bannerHeight = 150;
+static const float marginItem = 20;
+static const float navPlusStatus = 64;
+static const float animationTime = 0.33;
+static const float delayTime = 0;
+static const float bannerHeight = 150;
 #define color  [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 #define NAVBAR_CHANGE_POINT 50
 
