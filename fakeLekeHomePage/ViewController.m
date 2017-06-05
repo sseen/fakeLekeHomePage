@@ -10,6 +10,7 @@
 #import "BannerCollectionReusableView.h"
 #import "UINavigationBar+Awesome.h"
 #import "ChildViewController.h"
+#import "fakeLekeHomePage-Swift.h"
 
 typedef NS_ENUM(NSInteger, HomeHeaderState) {
     HomeHeaderStateHided,

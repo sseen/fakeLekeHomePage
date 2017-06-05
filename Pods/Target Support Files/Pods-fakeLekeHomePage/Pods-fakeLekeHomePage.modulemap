@@ -1,0 +1,6 @@
+framework module Pods_fakeLekeHomePage {
+  umbrella header "Pods-fakeLekeHomePage-umbrella.h"
+
+  export *
+  module * { export * }
+}
