@@ -10,59 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "fakeLekeHomePage/ViewController.m"
-            timestampString = "518355317.761431"
+            timestampString = "518433574.160487"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
-            landmarkName = "-nextScrollEndDeceleratingWithTable:velocity:table:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ViewController nextScrollEndDeceleratingWithTable:velocity:table:]"
-                  moduleName = "fakeLekeHomePage"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zyang/SNProject/fakeLekeHomePage/fakeLekeHomePage/ViewController.m"
-                  timestampString = "518424294.760967"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "323"
-                  endingLineNumber = "323"
-                  offsetFromSymbolStart = "1133">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__68-[ViewController nextScrollEndDeceleratingWithTable:velocity:table:]_block_invoke.124"
-                  moduleName = "fakeLekeHomePage"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zyang/SNProject/fakeLekeHomePage/fakeLekeHomePage/ViewController.m"
-                  timestampString = "518424294.76398"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "323"
-                  endingLineNumber = "323"
-                  offsetFromSymbolStart = "30">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "fakeLekeHomePage/ViewController.m"
-            timestampString = "518355628.965659"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "-scrollViewDidEndDecelerating:"
             landmarkType = "7">
          </BreakpointContent>
@@ -73,61 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "fakeLekeHomePage/ViewController.m"
-            timestampString = "518355788.412592"
+            filePath = "fakeLekeHomePage/TableChildExampleViewController.swift"
+            timestampString = "518430301.617858"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
-            landmarkName = "-nextScrollEndDeceleratingWithTable:velocity:table:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ViewController nextScrollEndDeceleratingWithTable:velocity:table:]"
-                  moduleName = "fakeLekeHomePage"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zyang/SNProject/fakeLekeHomePage/fakeLekeHomePage/ViewController.m"
-                  timestampString = "518424294.782585"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "338"
-                  endingLineNumber = "338"
-                  offsetFromSymbolStart = "1484">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__68-[ViewController nextScrollEndDeceleratingWithTable:velocity:table:]_block_invoke.128"
-                  moduleName = "fakeLekeHomePage"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zyang/SNProject/fakeLekeHomePage/fakeLekeHomePage/ViewController.m"
-                  timestampString = "518424294.785314"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "338"
-                  endingLineNumber = "338"
-                  offsetFromSymbolStart = "30">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "fakeLekeHomePage/ViewController.m"
-            timestampString = "518422066.115718"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
-            landmarkName = "-nextScrollEndDeceleratingWithTable:velocity:table:"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "fakeLekeHomePage/TableChildExampleViewController.swift"
-            timestampString = "518423379.719498"
+            timestampString = "518433044.944786"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "scrollViewDidEndDecelerating(_:)"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "scrollViewDidScroll(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -137,6 +137,9 @@ static const float bannerHeight = 150;
     return reusableview;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@" collection ");
+}
 
 #pragma mark - flow
 

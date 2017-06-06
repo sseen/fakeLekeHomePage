@@ -54,7 +54,6 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
         tableView.register(UINib(nibName: "PostCell", bundle: Bundle.main), forCellReuseIdentifier: cellIdentifier)
         tableView.estimatedRowHeight = 60.0
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.allowsSelection = false
         if blackTheme {
             tableView.backgroundColor = UIColor(red: 15/255.0, green: 16/255.0, blue: 16/255.0, alpha: 1.0)
         }
@@ -84,6 +83,12 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
             cell.changeStylToBlack()
         }
         return cell
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("hello world")
+        self.navigationController?.pushViewController(ChildExampleViewController(itemInfo: " ssn "), animated: true)
     }
     
     // MARK: - scroll view
