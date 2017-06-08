@@ -301,7 +301,7 @@ static const float bannerHeight = 150;
     
     float yOffset = contentOffset.y;
     float headerHeight = CGRectGetHeight(_headerViewDel.frame);
-    float tableHeight  = CGRectGetHeight(table.frame);
+    float tableHeight  = CGRectGetHeight(self.view.frame) - 44  - 20;//
     
     if (_isUp!=HomeHeaderStateShowing && !velocity) {// scroll up, header disappear will show
         if ( contentOffset.y<10) {
@@ -325,7 +325,7 @@ static const float bannerHeight = 150;
             if (_upMoveOffset - yOffset > 40*1.5) {
                 [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
                     _headerViewDel.frame = CGRectMake(0, navPlusStatus - bannerHeight, _screenWidth, headerHeight);
-                    table.frame = CGRectMake(0, navPlusStatus + headerHeight -  bannerHeight, _screenWidth, tableHeight );
+                    table.frame = CGRectMake(0, navPlusStatus + headerHeight -  bannerHeight, _screenWidth, tableHeight);
                 } completion:nil];
                 
                 _upMoveOffset = yOffset;
