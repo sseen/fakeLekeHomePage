@@ -26,8 +26,6 @@ import Foundation
 import XLPagerTabStrip
 
 protocol homeScrollDelegate {
-    func scrollDid()
-    func scrollEndDecelerating(_ contentOffSet: CGPoint, velocity:Bool)
     func scrollEndDeceleratingWithTable(_ contentOffSet: CGPoint, velocity:Bool, table:UIView)
 }
 
@@ -142,7 +140,6 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
 
     }
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // delegate.scrollEndDecelerating(scrollView.contentOffset, velocity: self.velocity)
         delegate.scrollEndDeceleratingWithTable(scrollView.contentOffset, velocity: self.velocity, table: self.view)
     }
 

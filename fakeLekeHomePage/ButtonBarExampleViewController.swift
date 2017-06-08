@@ -27,7 +27,6 @@ import XLPagerTabStrip
 
 @objc(nextHomeScrollDelegate)
 protocol nextHomeScrollDelegate {
-    func nextScrollEndDecelerating(_ contentOffset: CGPoint, velocity:Bool)
     func nextScrollEndDeceleratingWithTable(_ contentOffset: CGPoint, velocity:Bool, table:UIView)
 }
 
@@ -92,16 +91,10 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController, home
         return Array(childViewControllers.prefix(Int(nItems)))
     }
     
-    func scrollEndDecelerating(_ contentOffSet: CGPoint, velocity:Bool) {
-         nextDelegate.nextScrollEndDecelerating(contentOffSet, velocity: velocity)
-    }
     func scrollEndDeceleratingWithTable(_ contentOffSet: CGPoint, velocity: Bool, table: UIView) {
         nextDelegate.nextScrollEndDeceleratingWithTable(contentOffSet, velocity: velocity, table: self.view)
     }
     
-    func scrollDid() {
-        
-    }
 
     override func reloadPagerTabStripView() {
         isReload = true

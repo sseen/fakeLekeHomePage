@@ -26,7 +26,7 @@ static const float bannerHeight = 150;
 #define color  [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 #define NAVBAR_CHANGE_POINT 50
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, nextHomeScrollDelegate>
+@interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, nextHomeScrollDelegate>
 
 @property (strong, nonatomic) UIView *headerViewDel;
 @property (strong, nonatomic) UICollectionView *mainCollection;
@@ -180,118 +180,7 @@ static const float bannerHeight = 150;
 }
 
 
-#pragma mark - scroll
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    CGFloat offset = scrollView.contentOffset.y ;
-    CGFloat velocityY = [scrollView.panGestureRecognizer  velocityInView:self.view].y;
-    NSLog(@"%f, %ld, %f", offset, (long)scrollView.panGestureRecognizer.state, velocityY);
-    
-    self.velocity = velocityY < 0 ? true : false;
-    
-    //if ([scrollView isEqual:_mainTable]) {
-        
-        switch (scrollView.panGestureRecognizer.state) {
-                
-            case UIGestureRecognizerStateBegan: {
-                
-                [[scrollView delegate] scrollViewDidEndDecelerating:scrollView];
-                
-                // User began dragging
-                break;
-            }
-            case UIGestureRecognizerStateChanged: {
-                
-                [[scrollView delegate] scrollViewDidEndDecelerating:scrollView];
-                
-                // User is currently dragging the scroll view
-                break;
-            }
-            case UIGestureRecognizerStatePossible: {
-                
-                if (scrollView.contentOffset.y<10) {
-                    [[scrollView delegate] scrollViewDidEndDecelerating:scrollView];
-                }
-                
-                // The scroll view scrolling but the user is no longer touching the scrollview (table is decelerating)
-                break;
-            }
-            case UIGestureRecognizerStateEnded: {
-                
-                break;
-            }
-            
-            default: {
-                
-                break;
-            }
-                
-        }
-    //}
-    
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
-    // isUp : header show or hide
-    // velocity : because 主动调用 scrollViewDidEndDecelerating 后，scrollview 还会在滑动结束后自己调用一次，加上加速度代表是主动调用
-    // velocity negative imply up, active down
-    NSLog(@"%ld, %d, %f", (long)_isUp, _velocity, scrollView.contentOffset.y);
-    
-    float yOffset = scrollView.contentOffset.y;
-    float headerHeight = CGRectGetHeight(_headerViewDel.frame);
-    float tableHeight  = CGRectGetHeight(scrollView.frame);
-    
-    if (_isUp!=HomeHeaderStateShowing && !_velocity) {// scroll up, header disappear will show
-        if ( scrollView.contentOffset.y<10) {
-            
-            [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
-                _headerViewDel.frame = CGRectMake(0, 0, _screenWidth, headerHeight);
-                // _mainTable.frame = CGRectMake(0, headerHeight, _screenWidth, tableHeight);
-            } completion:nil];
-            
-            [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0]];
-            
-            _isUp = HomeHeaderStateShowing;
-        }
-        else { // partial show
-            
-            // 向上滚动到一定距离的时候才 animation
-            if (_upMoveOffset < yOffset) {
-                _upMoveOffset = yOffset;
-            }
-            
-            if (_upMoveOffset - yOffset > 40*1.5) {
-                [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
-                    _headerViewDel.frame = CGRectMake(0, navPlusStatus - bannerHeight, _screenWidth, headerHeight);
-                    // _mainTable.frame = CGRectMake(0, navPlusStatus + headerHeight -  bannerHeight, _screenWidth, tableHeight );
-                } completion:nil];
-                
-                _upMoveOffset = yOffset;
-                
-                _isUp = HomeHeaderStatePartial;
-            }
-            
-        }
-
-    }
-    
-    if (_velocity && yOffset > 10) {//scroll down, header show will hide
-        [UIView animateWithDuration:animationTime delay:delayTime options:UIViewAnimationOptionCurveLinear animations:^{
-            _headerViewDel.frame = CGRectMake(0, navPlusStatus - headerHeight , _screenWidth, headerHeight);
-            // _mainTable.frame = CGRectMake(0, navPlusStatus, _screenWidth, tableHeight);
-            
-            [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:1]];
-            
-        } completion:nil];
-        
-        if (_isUp==HomeHeaderStateShowing) {
-            _isUp = HomeHeaderStateHided;
-        }
-    }
-    
-}
+#pragma mark - next
 
 - (void)nextScrollEndDeceleratingWithTable:(CGPoint)contentOffset velocity:(BOOL)velocity table:(UIView * _Nonnull)table{
     // isUp : header show or hide
