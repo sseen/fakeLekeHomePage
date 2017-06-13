@@ -31,9 +31,19 @@ static char overlayKey;
         self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + 20)];
         self.overlay.userInteractionEnabled = NO;
         self.overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth;    // Should not set `UIViewAutoresizingFlexibleHeight`
+        
+        
+        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height + 20);
+        gradientLayer.locations = @[@0.0, @1.0];
+        gradientLayer.colors = [NSArray arrayWithObjects: (id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor, nil];
+        
+        [self.overlay.layer addSublayer:gradientLayer];
+        
         [[self.subviews firstObject] insertSubview:self.overlay atIndex:0];
     }
     self.overlay.backgroundColor = backgroundColor;
+    
 }
 
 - (void)lt_setTranslationY:(CGFloat)translationY
