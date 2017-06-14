@@ -39,7 +39,10 @@ static char overlayKey;
         
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
         gradientLayer.frame = CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.width, CGRectGetHeight(self.bounds) );
-         gradientLayer.colors = [NSArray arrayWithObjects:
+        // 直接渐变到相同的颜色，最底部会出现一条隐约的白线分割
+        // 直接渐变到背景色一样，会让图片遮住的部分也染上背景色，比如这里图片是灰色，背景是白色，上部分灰色有点变白的感觉
+        // 三种颜色，中间的颜色位于前后两色之间，作为过渡，白色部分距离短影响小
+        gradientLayer.colors = [NSArray arrayWithObjects:
                                  (id)UIColorFromRGBWithAlpha(0x5e5e5e,1).CGColor,
                                  (id)UIColorFromRGBWithAlpha(0xb5b5b5,0).CGColor,
                                  (id)UIColorFromRGBWithAlpha(0xffffff,0).CGColor, nil];
