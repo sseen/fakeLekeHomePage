@@ -44,9 +44,8 @@ static char overlayKey;
         // 三种颜色，中间的颜色位于前后两色之间，作为过渡，白色部分距离短影响小
         gradientLayer.colors = [NSArray arrayWithObjects:
                                  (id)UIColorFromRGBWithAlpha(0x5e5e5e,1).CGColor,
-                                 (id)UIColorFromRGBWithAlpha(0xb5b5b5,0).CGColor,
-                                 (id)UIColorFromRGBWithAlpha(0xffffff,0).CGColor, nil];
-        gradientLayer.locations = @[@0,@0.8,@1];
+                                 (id)UIColorFromRGBWithAlpha(0xb5b5b5,0).CGColor, nil];
+        gradientLayer.locations = @[@0,@1];
         gradientLayer.startPoint = CGPointMake(0, 0);
         gradientLayer.endPoint = CGPointMake(0, 1);
         
