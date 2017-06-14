@@ -10,6 +10,10 @@
 #import <objc/runtime.h>
 
 #define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define UIColorFromRGBWithAlpha(rgbValue,a) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 @implementation UINavigationBar (Awesome)
 static char overlayKey;
@@ -34,9 +38,9 @@ static char overlayKey;
         
         
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height + 20);
+        gradientLayer.frame = CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.width, CGRectGetHeight(self.bounds) + 20);
         gradientLayer.locations = @[@0.0, @1.0];
-        gradientLayer.colors = [NSArray arrayWithObjects: (id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor, nil];
+        gradientLayer.colors = [NSArray arrayWithObjects: (id)UIColorFromRGBWithAlpha(0x5e5e5e,1).CGColor, (id)UIColorFromRGBWithAlpha(0x5e5e5e,0).CGColor, nil];
         
         [self.overlay.layer addSublayer:gradientLayer];
         
