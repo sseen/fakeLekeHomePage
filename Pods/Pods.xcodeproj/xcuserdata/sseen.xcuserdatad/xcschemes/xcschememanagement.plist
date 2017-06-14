@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RxSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>XLPagerTabStrip-XLPagerTabStrip.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>00DE862D3C1931BF55F85DBCC3C66F40</key>
+		<key>18D8B661AE5245FD3A64FAEF4BB79C5E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0494DD7043370171882DF6667E0E5C4A</key>
+		<key>934C1F67419C30BF4F9E395D31F86377</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>23EA7912809FB0E7A8C14D4C0C0D53A2</key>
+		<key>AB72259CF6CB18BDF1D0E16FD34DF590</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F89B4737F8A08B71BE55BD2AA28B203E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

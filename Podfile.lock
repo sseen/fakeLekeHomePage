@@ -1,12 +1,15 @@
 PODS:
+  - RxSwift (3.1.0)
   - XLPagerTabStrip (6.0.0)
 
 DEPENDENCIES:
+  - RxSwift (~> 3.1.0)
   - XLPagerTabStrip (~> 6.0.0)
 
 SPEC CHECKSUMS:
+  RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 1e87308836fd1274878a5f812098833a11582efe
+PODFILE CHECKSUM: 00440ef9d333efcf7f6abf5f28ff79f9f0c77231
 
 COCOAPODS: 1.0.0
