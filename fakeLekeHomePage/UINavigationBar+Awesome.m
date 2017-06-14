@@ -38,9 +38,14 @@ static char overlayKey;
         
         
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.width, CGRectGetHeight(self.bounds) + 20);
-        gradientLayer.locations = @[@0.0, @1.0];
-        gradientLayer.colors = [NSArray arrayWithObjects: (id)UIColorFromRGBWithAlpha(0x5e5e5e,1).CGColor, (id)UIColorFromRGBWithAlpha(0x5e5e5e,0).CGColor, nil];
+        gradientLayer.frame = CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.width, CGRectGetHeight(self.bounds) );
+         gradientLayer.colors = [NSArray arrayWithObjects:
+                                 (id)UIColorFromRGBWithAlpha(0x5e5e5e,1).CGColor,
+                                 (id)UIColorFromRGBWithAlpha(0xb5b5b5,0).CGColor,
+                                 (id)UIColorFromRGBWithAlpha(0xffffff,0).CGColor, nil];
+        gradientLayer.locations = @[@0,@0.8,@1];
+        gradientLayer.startPoint = CGPointMake(0, 0);
+        gradientLayer.endPoint = CGPointMake(0, 1);
         
         [self.overlay.layer addSublayer:gradientLayer];
         
