@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import 
 
 enum HomeHeaderState{
     case hided
@@ -54,6 +56,8 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         mainCollection.delegate = self
         mainCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: commonUse.cellReuse)
         mainCollection.register(BannerCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: commonUse.headerReuse)
+        
+        mainCollection.
         
         self.view.addSubview(mainCollection)
         self.headerVIewDel = mainCollection;
