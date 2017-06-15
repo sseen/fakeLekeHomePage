@@ -39,11 +39,7 @@ static char gradientLayKey;
 
 - (void)lt_setBackgroundColor:(UIColor *)backgroundColor
 {
-    if ([backgroundColor isEqual:[UIColor clearColor]]) {
-        self.gradientLay.hidden = false;
-    }else {
-        self.gradientLay.hidden = true;
-    }
+
     if (!self.overlay) {
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + 20)];
@@ -66,6 +62,13 @@ static char gradientLayKey;
         
         [[self.subviews firstObject] insertSubview:self.overlay atIndex:0];
     }
+    
+    if (![backgroundColor isEqual:[UIColor clearColor]]) {
+        self.gradientLay.hidden = true;
+    }else {
+        self.gradientLay.hidden = false;
+    }
+    
     self.overlay.backgroundColor = backgroundColor;
     
 }

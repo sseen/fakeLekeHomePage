@@ -41,6 +41,8 @@ class ChildExampleViewController: UIViewController, IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "o"
+        
 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,9 +50,16 @@ class ChildExampleViewController: UIViewController, IndicatorInfoProvider {
 
         view.addSubview(label)
         view.backgroundColor = .white
+        
 
         view.addConstraint(NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -50))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.brown)
     }
 
     // MARK: - IndicatorInfoProvider
