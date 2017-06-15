@@ -17,6 +17,15 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 @implementation UINavigationBar (Awesome)
 static char overlayKey;
+static char gradientLayKey;
+
+- (CAGradientLayer *)gradientLay{
+    return objc_getAssociatedObject(self, &gradientLayKey);
+}
+
+- (void)setGradientLay:(CAGradientLayer *)gradientLay {
+    objc_setAssociatedObject(self, &gradientLayKey, gradientLay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 - (UIView *)overlay
 {
@@ -30,26 +39,30 @@ static char overlayKey;
 
 - (void)lt_setBackgroundColor:(UIColor *)backgroundColor
 {
+    if ([backgroundColor isEqual:[UIColor clearColor]]) {
+        self.gradientLay.hidden = false;
+    }else {
+        self.gradientLay.hidden = true;
+    }
     if (!self.overlay) {
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + 20)];
         self.overlay.userInteractionEnabled = NO;
         self.overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth;    // Should not set `UIViewAutoresizingFlexibleHeight`
         
-        
-        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.width, CGRectGetHeight(self.bounds) );
+        self.gradientLay = [CAGradientLayer layer];
+        self.gradientLay.frame = CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.width, CGRectGetHeight(self.bounds) );
         // 直接渐变到相同的颜色，最底部会出现一条隐约的白线分割
         // 直接渐变到背景色一样，会让图片遮住的部分也染上背景色，比如这里图片是灰色，背景是白色，上部分灰色有点变白的感觉
         // 三种颜色，中间的颜色位于前后两色之间，作为过渡，白色部分距离短影响小
-        gradientLayer.colors = [NSArray arrayWithObjects:
-                                 (id)UIColorFromRGBWithAlpha(0x5e5e5e,1).CGColor,
-                                 (id)UIColorFromRGBWithAlpha(0xb5b5b5,0).CGColor, nil];
-        gradientLayer.locations = @[@0,@1];
-        gradientLayer.startPoint = CGPointMake(0, 0);
-        gradientLayer.endPoint = CGPointMake(0, 1);
+        self.gradientLay.colors = [NSArray arrayWithObjects:
+                                (id)UIColorFromRGBWithAlpha(0x5e5e5e,1).CGColor,
+                                (id)UIColorFromRGBWithAlpha(0xb5b5b5,0).CGColor, nil];
+        self.gradientLay.locations = @[@0,@1];
+        self.gradientLay.startPoint = CGPointMake(0, 0);
+        self.gradientLay.endPoint = CGPointMake(0, 1);
         
-        [self.overlay.layer addSublayer:gradientLayer];
+        [self.overlay.layer addSublayer:self.gradientLay];
         
         [[self.subviews firstObject] insertSubview:self.overlay atIndex:0];
     }
@@ -91,5 +104,4 @@ static char overlayKey;
     [self.overlay removeFromSuperview];
     self.overlay = nil;
 }
-
 @end

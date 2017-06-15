@@ -40,6 +40,7 @@ class ChildExampleViewController: UIViewController, IndicatorInfoProvider {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -33,7 +33,17 @@ protocol nextHomeScrollDelegate {
 class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController, homeScrollDelegate {
 
     var isReload = false
-    var nextDelegate: nextHomeScrollDelegate!
+    var nextDelegate: nextHomeScrollDelegate
+    
+    init(delegate:nextHomeScrollDelegate) {
+        self.nextDelegate = delegate
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 //    http://blog.scottlogic.com/2014/11/20/swift-initialisation.html
 //    折腾这个init 方法也是够了,最后参数 nextDelegate 后面加个 ！ 后解决了
