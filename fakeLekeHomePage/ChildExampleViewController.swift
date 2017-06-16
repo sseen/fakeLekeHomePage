@@ -58,10 +58,11 @@ class ChildExampleViewController: UIViewController, IndicatorInfoProvider {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.brown)
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
     // MARK: - IndicatorInfoProvider
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

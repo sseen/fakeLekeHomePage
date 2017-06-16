@@ -10,12 +10,10 @@
 		7DC886147996E14B86FBFC2B /* Pods_fakeLekeHomePage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3DEB843362CED67F05077F /* Pods_fakeLekeHomePage.framework */; };
 		92AA7F451EF134C9009DBE57 /* RDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA7F441EF134C9009DBE57 /* RDViewController.swift */; };
 		92ACD24C1EB98A0E00AA6FBA /* BannerCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACD24B1EB98A0E00AA6FBA /* BannerCollectionReusableView.m */; };
-		92ACD24F1EB9C18600AA6FBA /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACD24E1EB9C18600AA6FBA /* UINavigationBar+Awesome.m */; };
 		92ACD2521EB9DFA500AA6FBA /* ChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACD2511EB9DFA500AA6FBA /* ChildViewController.m */; };
 		92B93C941EE4FC0D002B9A13 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B93C931EE4FC0D002B9A13 /* TestViewController.swift */; };
 		92F27C6B1EB32DD300D98CA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F27C6A1EB32DD300D98CA8 /* main.m */; };
 		92F27C6E1EB32DD300D98CA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F27C6D1EB32DD300D98CA8 /* AppDelegate.m */; };
-		92F27C711EB32DD300D98CA8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F27C701EB32DD300D98CA8 /* ViewController.m */; };
 		92F27C741EB32DD300D98CA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F27C721EB32DD300D98CA8 /* Main.storyboard */; };
 		92F27C761EB32DD300D98CA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92F27C751EB32DD300D98CA8 /* Assets.xcassets */; };
 		92F27C791EB32DD300D98CA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F27C771EB32DD300D98CA8 /* LaunchScreen.storyboard */; };
@@ -33,8 +31,6 @@
 		92AA7F441EF134C9009DBE57 /* RDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDViewController.swift; sourceTree = "<group>"; };
 		92ACD24A1EB98A0E00AA6FBA /* BannerCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerCollectionReusableView.h; sourceTree = "<group>"; };
 		92ACD24B1EB98A0E00AA6FBA /* BannerCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerCollectionReusableView.m; sourceTree = "<group>"; };
-		92ACD24D1EB9C18600AA6FBA /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
-		92ACD24E1EB9C18600AA6FBA /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		92ACD2501EB9DFA500AA6FBA /* ChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildViewController.h; sourceTree = "<group>"; };
 		92ACD2511EB9DFA500AA6FBA /* ChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildViewController.m; sourceTree = "<group>"; };
 		92B93C921EE4FC0C002B9A13 /* fakeLekeHomePage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fakeLekeHomePage-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -43,8 +39,6 @@
 		92F27C6A1EB32DD300D98CA8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92F27C6C1EB32DD300D98CA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		92F27C6D1EB32DD300D98CA8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		92F27C6F1EB32DD300D98CA8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		92F27C701EB32DD300D98CA8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		92F27C731EB32DD300D98CA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92F27C751EB32DD300D98CA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92F27C781EB32DD300D98CA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -108,12 +102,8 @@
 		92F27C681EB32DD300D98CA8 /* fakeLekeHomePage */ = {
 			isa = PBXGroup;
 			children = (
-				92ACD24D1EB9C18600AA6FBA /* UINavigationBar+Awesome.h */,
-				92ACD24E1EB9C18600AA6FBA /* UINavigationBar+Awesome.m */,
 				92F27C6C1EB32DD300D98CA8 /* AppDelegate.h */,
 				92F27C6D1EB32DD300D98CA8 /* AppDelegate.m */,
-				92F27C6F1EB32DD300D98CA8 /* ViewController.h */,
-				92F27C701EB32DD300D98CA8 /* ViewController.m */,
 				92ACD24A1EB98A0E00AA6FBA /* BannerCollectionReusableView.h */,
 				92ACD24B1EB98A0E00AA6FBA /* BannerCollectionReusableView.m */,
 				92ACD2501EB9DFA500AA6FBA /* ChildViewController.h */,
@@ -278,7 +268,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				92B93C941EE4FC0D002B9A13 /* TestViewController.swift in Sources */,
-				92F27C711EB32DD300D98CA8 /* ViewController.m in Sources */,
 				92ACD24C1EB98A0E00AA6FBA /* BannerCollectionReusableView.m in Sources */,
 				92F27C6E1EB32DD300D98CA8 /* AppDelegate.m in Sources */,
 				92FCB95B1EE5055A0051710B /* ChildExampleViewController.swift in Sources */,
@@ -287,7 +276,6 @@
 				92FCB95E1EE5057B0051710B /* ButtonBarExampleViewController.swift in Sources */,
 				92F27C6B1EB32DD300D98CA8 /* main.m in Sources */,
 				92FCB95C1EE5055A0051710B /* TableChildExampleViewController.swift in Sources */,
-				92ACD24F1EB9C18600AA6FBA /* UINavigationBar+Awesome.m in Sources */,
 				92ACD2521EB9DFA500AA6FBA /* ChildViewController.m in Sources */,
 				92FCB9641EE5078C0051710B /* PostCell.swift in Sources */,
 			);

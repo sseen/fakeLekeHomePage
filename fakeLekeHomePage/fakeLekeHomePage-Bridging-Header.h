@@ -3,5 +3,4 @@
 //
 
 #import "BannerCollectionReusableView.h"
-#import "UINavigationBar+Awesome.h"
 #import "ChildViewController.h"

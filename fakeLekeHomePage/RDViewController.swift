@@ -8,7 +8,7 @@
 
 import UIKit
 import RxSwift
-import 
+import RxCocoa
 
 enum HomeHeaderState{
     case hided
@@ -57,7 +57,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         mainCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: commonUse.cellReuse)
         mainCollection.register(BannerCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: commonUse.headerReuse)
         
-        mainCollection.
+        
         
         self.view.addSubview(mainCollection)
         self.headerVIewDel = mainCollection;
@@ -73,15 +73,12 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clear)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // self.navigationController?.navigationBar.lt_reset()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -159,7 +156,7 @@ extension RDViewController:nextHomeScrollDelegate {
     func nextScrollEndDeceleratingWithTable(_ contentOffset: CGPoint, velocity: Bool, table: UIView) {
         let yOffset = contentOffset.y
         let headerHeight = headerVIewDel.frame.height
-        let tableHeight = self.view.frame.height - 44 - 20
+        let tableHeight = self.view.frame.height
         
         if isUp != .showing && !velocity {
             if contentOffset.y < 10 {
@@ -168,7 +165,6 @@ extension RDViewController:nextHomeScrollDelegate {
                     table.frame = CGRect(x:0, y:headerHeight, width:self.screenWidth, height:tableHeight)
                 }, completion: nil)
                 
-                self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clear)
                 isUp = .showing
             } else {
                 // partial show
@@ -179,8 +175,8 @@ extension RDViewController:nextHomeScrollDelegate {
                 
                 if upMoveOffset - yOffset > 40 * 1.5 {
                     UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
-                        self.headerVIewDel.frame = CGRect(x: 0, y: self.commonUse.navPlusStatus - self.commonUse.bannerHeight, width: self.screenWidth, height: headerHeight)
-                        table.frame = CGRect(x: 0, y: self.commonUse.navPlusStatus + headerHeight - self.commonUse.bannerHeight, width: self.screenWidth, height: tableHeight)
+                        self.headerVIewDel.frame = CGRect(x: 0, y: -self.commonUse.bannerHeight, width: self.screenWidth, height: headerHeight)
+                        table.frame = CGRect(x: 0, y: headerHeight - self.commonUse.bannerHeight, width: self.screenWidth, height: tableHeight)
                     }, completion: nil)
                     
                     upMoveOffset = yOffset
@@ -192,9 +188,8 @@ extension RDViewController:nextHomeScrollDelegate {
         if velocity && yOffset > 10 {
             //scroll down, header show will hide
             UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
-                self.headerVIewDel.frame = CGRect(x: 0, y: self.commonUse.navPlusStatus - headerHeight, width: self.screenWidth, height: headerHeight)
-                table.frame = CGRect(x: 0, y: self.commonUse.navPlusStatus, width: self.screenWidth, height: tableHeight)
-                self.navigationController?.navigationBar.lt_setBackgroundColor(self.commonUse.color)
+                self.headerVIewDel.frame = CGRect(x: 0, y: -self.commonUse.navPlusStatus - headerHeight, width: self.screenWidth, height: headerHeight)
+                table.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: tableHeight)
             }, completion: nil)
             
             if isUp == .showing {
