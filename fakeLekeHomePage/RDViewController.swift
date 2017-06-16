@@ -21,7 +21,7 @@ struct CommonUnit {
     let navPlusStatus:CGFloat = 64
     let animationTime:TimeInterval = 0.33
     let delayTime:TimeInterval = 0
-    let bannerHeight:CGFloat = 150
+    let bannerHeight:CGFloat = 120
     let navbar_change_point = 50
     let cellReuse = "cell0"
     let headerReuse = "headerView"
@@ -50,7 +50,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         
         let layout = UICollectionViewFlowLayout()
         layout.headerReferenceSize = CGSize(width: screenWidth, height:commonUse.bannerHeight)
-        mainCollection = UICollectionView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: commonUse.bannerHeight * 2), collectionViewLayout: layout)
+        mainCollection = UICollectionView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: commonUse.bannerHeight * 2 - 30), collectionViewLayout: layout)
         mainCollection.backgroundColor = UIColor.white
         mainCollection.dataSource = self
         mainCollection.delegate = self
@@ -118,6 +118,10 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     }
 
     // MARK: - flow
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: screenWidth, height: 120)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.itemWidth()
         return CGSize(width: width, height: width)

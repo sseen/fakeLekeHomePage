@@ -17,9 +17,10 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
         imgView.image = [UIImage imageNamed:@"banner"];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
         
         [self addSubview:imgView];
         imgView.center = self.center;
