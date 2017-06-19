@@ -50,7 +50,8 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         
         let layout = UICollectionViewFlowLayout()
         layout.headerReferenceSize = CGSize(width: screenWidth, height:commonUse.bannerHeight)
-        mainCollection = UICollectionView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: commonUse.bannerHeight * 2 - 30), collectionViewLayout: layout)
+        mainCollection = UICollectionView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: commonUse.bannerHeight * 2), collectionViewLayout: layout)
+        mainCollection.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         mainCollection.backgroundColor = UIColor.white
         mainCollection.dataSource = self
         mainCollection.delegate = self
@@ -119,16 +120,16 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
 
     // MARK: - flow
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: screenWidth, height: 120)
+        return CGSize(width: screenWidth, height: commonUse.bannerHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.itemWidth()
-        return CGSize(width: width, height: width)
+        return CGSize(width: width, height: commonUse.bannerHeight/2) // two lines两排
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return self.itemSpacing() / 2
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
