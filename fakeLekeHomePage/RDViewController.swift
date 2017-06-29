@@ -39,6 +39,8 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     var screenHeight:CGFloat!
     var upMoveOffset:CGFloat = 0
     let commonUse = CommonUnit()
+    
+    var disposeBag: DisposeBag?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +60,16 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         mainCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: commonUse.cellReuse)
         mainCollection.register(BannerCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: commonUse.headerReuse)
         
+        let items = Observable.just(
+            (0..<20).map{"\($0)"}
+        )
         
+
+        items
+            .bind(to: mainCollection.rx.items(cellIdentifier: commonUse.cellReuse, cellType: UICollectionViewCell.self)) { (row, element, cell) in
+                cell.textLabel?.text = "\(element) @ row \(row)"
+            }
+            .disposed(by: disposeBag)
         
         self.view.addSubview(mainCollection)
         self.headerVIewDel = mainCollection;

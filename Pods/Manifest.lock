@@ -1,19 +1,19 @@
 PODS:
-  - RxCocoa (3.1.0):
-    - RxSwift (~> 3.1)
-  - RxSwift (3.1.0)
+  - RxCocoa (3.5.0):
+    - RxSwift (~> 3.4)
+  - RxSwift (3.5.0)
   - XLPagerTabStrip (6.0.0)
 
 DEPENDENCIES:
-  - RxCocoa (~> 3.1.0)
-  - RxSwift (~> 3.1.0)
+  - RxCocoa (~> 3.5.0)
+  - RxSwift (~> 3.5.0)
   - XLPagerTabStrip (~> 6.0.0)
 
 SPEC CHECKSUMS:
-  RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
-  RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
+  RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
+  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 9ffe5fa01e2bae94593c8e6a63020c294405d538
+PODFILE CHECKSUM: 53da997b182f9b77230f2bbacf344e2792963ee8
 
 COCOAPODS: 1.2.1
