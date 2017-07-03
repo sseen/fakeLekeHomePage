@@ -29,7 +29,7 @@ struct CommonUnit {
     let color = UIColor(colorLiteralRed: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
 }
 
-class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
+class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     var headerVIewDel:UIView!
     var mainCollection:UICollectionView!
@@ -44,6 +44,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let disposeBag = DisposeBag()
         
         self.navigationController?.navigationBar.barStyle = .black
         
@@ -55,21 +56,27 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         mainCollection = UICollectionView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: commonUse.bannerHeight * 2), collectionViewLayout: layout)
         mainCollection.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         mainCollection.backgroundColor = UIColor.white
-        mainCollection.dataSource = self
         mainCollection.delegate = self
         mainCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: commonUse.cellReuse)
         mainCollection.register(BannerCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: commonUse.headerReuse)
         
+        
+        
         let items = Observable.just(
-            (0..<20).map{"\($0)"}
+            (0..<5).map{"\($0)"}
         )
         
-
         items
             .bind(to: mainCollection.rx.items(cellIdentifier: commonUse.cellReuse, cellType: UICollectionViewCell.self)) { (row, element, cell) in
-                cell.textLabel?.text = "\(element) @ row \(row)"
+                let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+                lbl.text = "o"
+                lbl.textColor = UIColor.black
+                cell.contentView.addSubview(lbl)
+                cell.backgroundColor = UIColor.darkGray
+                print(cell.isHidden)
             }
             .disposed(by: disposeBag)
+        
         
         self.view.addSubview(mainCollection)
         self.headerVIewDel = mainCollection;
@@ -105,16 +112,6 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     }
     
     // MARK: - collection
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commonUse.cellReuse, for: indexPath)
-        cell.backgroundColor = UIColor.darkGray
-        
-        return cell
-    }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var reusableView:UICollectionReusableView! = nil
