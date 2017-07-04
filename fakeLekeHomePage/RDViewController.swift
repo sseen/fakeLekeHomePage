@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 enum HomeHeaderState{
     case hided
@@ -29,7 +30,7 @@ struct CommonUnit {
     let color = UIColor(colorLiteralRed: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
 }
 
-
+typealias NumberSection = AnimatableSectionModel<String, Int>
 private let disposeBag = DisposeBag()
 
 class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
@@ -42,6 +43,11 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     var screenHeight:CGFloat!
     var upMoveOffset:CGFloat = 0
     let commonUse = CommonUnit()
+    
+    var sections = Variable([NumberSection]())
+    static let initialValue: [AnimatableSectionModel<String, Int>] = [
+        NumberSection(model: "section 1", items: [1, 2, 3, 4, 5, 6])
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +63,8 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         mainCollection.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         mainCollection.backgroundColor = UIColor.white
         mainCollection.delegate = self
-        mainCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: commonUse.cellReuse)
-        mainCollection.register(BannerCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: commonUse.headerReuse)
+        mainCollection.register(RDHomeCollectionViewCell.self, forCellWithReuseIdentifier: commonUse.cellReuse)
+        mainCollection.register(RDHomeCollectionSectionView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: commonUse.headerReuse)
 
         self.view.addSubview(mainCollection)
         self.headerVIewDel = mainCollection;
@@ -69,16 +75,35 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         self.view.addSubview(vc.view)
         vc.didMove(toParentViewController: self)
         
-
-        let items = Observable.just(
-            (0..<5).map{"\($0)"}
-        )
-        
-        items
-            .bind(to: mainCollection.rx.items(cellIdentifier: commonUse.cellReuse, cellType: UICollectionViewCell.self)) { (row, element, cell) in
-                cell.backgroundColor = UIColor.darkGray
+        // rx data
+        self.sections.value = RDViewController.initialValue
+        let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<NumberSection>()
+        // cell
+        cvReloadDataSource.configureCell = { (_, cv, ip, i) in
+            let cell = cv.dequeueReusableCell(withReuseIdentifier: self.commonUse.cellReuse, for: ip) as! RDHomeCollectionViewCell
+            cell.textLabel.text = "\(i)"
+            cell.backgroundColor = UIColor.darkGray
+            
+            return cell
+        }
+        // section
+        cvReloadDataSource.supplementaryViewFactory = { (dataSource, cv, kind, ip) in
+            
+            var section:UICollectionReusableView! = nil
+            
+            if kind == UICollectionElementKindSectionHeader {
+                section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.commonUse.headerReuse, for: ip) as! RDHomeCollectionSectionView
             }
+            if kind == UICollectionElementKindSectionFooter {
+                section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: ip) as! RDHomeCollectionSectionView
+            }
+            
+            return section
+        }
+        self.sections.asObservable()
+            .bind(to: mainCollection.rx.items(dataSource: cvReloadDataSource))
             .disposed(by: disposeBag)
+        
         
     }
     

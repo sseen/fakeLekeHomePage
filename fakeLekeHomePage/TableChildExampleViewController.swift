@@ -91,7 +91,7 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
     
     // MARK: - scroll view
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let  offset = scrollView.contentOffset.y
+        // let  offset = scrollView.contentOffset.y
         let  velocityY = scrollView.panGestureRecognizer.velocity(in: self.view).y
         // print ("\(offset), \(scrollView.panGestureRecognizer.state),\(velocityY)")
         

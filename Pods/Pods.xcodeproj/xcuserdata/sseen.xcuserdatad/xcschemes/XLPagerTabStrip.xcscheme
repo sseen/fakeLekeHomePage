@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8504F151B5E6922CDEEF28EF7C804AA6'
+               BlueprintIdentifier = 'E2E3917248A11132055B034C7E2F4CB4'
                BlueprintName = 'XLPagerTabStrip'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'XLPagerTabStrip.framework'>

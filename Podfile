@@ -7,7 +7,9 @@ target 'fakeLekeHomePage' do
 
   # Pods for fakeLekeHomePage
   pod 'XLPagerTabStrip', '~> 6.0.0'
+
   pod 'RxSwift', '~> 3.5.0'
   pod 'RxCocoa', '~> 3.5.0'
+  pod 'RxDataSources', '~> 1.0.4'
 
 end
