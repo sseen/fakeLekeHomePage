@@ -29,6 +29,9 @@ struct CommonUnit {
     let color = UIColor(colorLiteralRed: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
 }
 
+
+private let disposeBag = DisposeBag()
+
 class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     var headerVIewDel:UIView!
@@ -39,12 +42,9 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     var screenHeight:CGFloat!
     var upMoveOffset:CGFloat = 0
     let commonUse = CommonUnit()
-    
-    var disposeBag: DisposeBag?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let disposeBag = DisposeBag()
         
         self.navigationController?.navigationBar.barStyle = .black
         
@@ -59,25 +59,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         mainCollection.delegate = self
         mainCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: commonUse.cellReuse)
         mainCollection.register(BannerCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: commonUse.headerReuse)
-        
-        
-        
-        let items = Observable.just(
-            (0..<5).map{"\($0)"}
-        )
-        
-        items
-            .bind(to: mainCollection.rx.items(cellIdentifier: commonUse.cellReuse, cellType: UICollectionViewCell.self)) { (row, element, cell) in
-                let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-                lbl.text = "o"
-                lbl.textColor = UIColor.black
-                cell.contentView.addSubview(lbl)
-                cell.backgroundColor = UIColor.darkGray
-                print(cell.isHidden)
-            }
-            .disposed(by: disposeBag)
-        
-        
+
         self.view.addSubview(mainCollection)
         self.headerVIewDel = mainCollection;
         
@@ -86,6 +68,17 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         self.addChildViewController(vc)
         self.view.addSubview(vc.view)
         vc.didMove(toParentViewController: self)
+        
+
+        let items = Observable.just(
+            (0..<5).map{"\($0)"}
+        )
+        
+        items
+            .bind(to: mainCollection.rx.items(cellIdentifier: commonUse.cellReuse, cellType: UICollectionViewCell.self)) { (row, element, cell) in
+                cell.backgroundColor = UIColor.darkGray
+            }
+            .disposed(by: disposeBag)
         
     }
     
