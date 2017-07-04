@@ -39,8 +39,6 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     var mainCollection:UICollectionView!
     var isUp = HomeHeaderState.hided
     var velocity = false
-    var screenWidth:CGFloat!
-    var screenHeight:CGFloat!
     var upMoveOffset:CGFloat = 0
     let commonUse = CommonUnit()
     
@@ -54,12 +52,9 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         
         self.navigationController?.navigationBar.barStyle = .black
         
-        screenWidth = self.view.frame.width
-        screenHeight = self.view.frame.height
-        
         let layout = UICollectionViewFlowLayout()
-        layout.headerReferenceSize = CGSize(width: screenWidth, height:commonUse.bannerHeight)
-        mainCollection = UICollectionView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: commonUse.bannerHeight * 2), collectionViewLayout: layout)
+        layout.headerReferenceSize = CGSize(width: K.ViewSize.SCREEN_WIDTH, height:commonUse.bannerHeight)
+        mainCollection = UICollectionView(frame: CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: commonUse.bannerHeight * 2), collectionViewLayout: layout)
         mainCollection.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         mainCollection.backgroundColor = UIColor.white
         mainCollection.delegate = self
@@ -128,25 +123,10 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: - collection
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var reusableView:UICollectionReusableView! = nil
-        
-        if kind == UICollectionElementKindSectionHeader {
-            reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: commonUse.headerReuse, for: indexPath)
-        }
-        if kind == UICollectionElementKindSectionFooter {
-            reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "FooterView", for: indexPath)
-        }
-        
-        return reusableView
-    }
 
     // MARK: - flow
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: screenWidth, height: commonUse.bannerHeight)
+        return CGSize(width: K.ViewSize.SCREEN_WIDTH, height: commonUse.bannerHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -192,8 +172,8 @@ extension RDViewController:nextHomeScrollDelegate {
         if isUp != .showing && !velocity {
             if contentOffset.y < 10 {
                 UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
-                    self.headerVIewDel.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: headerHeight)
-                    table.frame = CGRect(x:0, y:headerHeight, width:self.screenWidth, height:tableHeight)
+                    self.headerVIewDel.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: headerHeight)
+                    table.frame = CGRect(x:0, y:headerHeight, width:K.ViewSize.SCREEN_WIDTH, height:tableHeight)
                 }, completion: nil)
                 
                 isUp = .showing
@@ -206,8 +186,8 @@ extension RDViewController:nextHomeScrollDelegate {
                 
                 if upMoveOffset - yOffset > 40 * 1.5 {
                     UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
-                        self.headerVIewDel.frame = CGRect(x: 0, y: -self.commonUse.bannerHeight, width: self.screenWidth, height: headerHeight)
-                        table.frame = CGRect(x: 0, y: headerHeight - self.commonUse.bannerHeight, width: self.screenWidth, height: tableHeight)
+                        self.headerVIewDel.frame = CGRect(x: 0, y: -self.commonUse.bannerHeight, width: K.ViewSize.SCREEN_WIDTH, height: headerHeight)
+                        table.frame = CGRect(x: 0, y: headerHeight - self.commonUse.bannerHeight, width: K.ViewSize.SCREEN_WIDTH, height: tableHeight)
                     }, completion: nil)
                     
                     upMoveOffset = yOffset
@@ -219,8 +199,8 @@ extension RDViewController:nextHomeScrollDelegate {
         if velocity && yOffset > 10 {
             //scroll down, header show will hide
             UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
-                self.headerVIewDel.frame = CGRect(x: 0, y: -self.commonUse.navPlusStatus - headerHeight, width: self.screenWidth, height: headerHeight)
-                table.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: tableHeight)
+                self.headerVIewDel.frame = CGRect(x: 0, y: -self.commonUse.navPlusStatus - headerHeight, width: K.ViewSize.SCREEN_WIDTH, height: headerHeight)
+                table.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: tableHeight)
             }, completion: nil)
             
             if isUp == .showing {

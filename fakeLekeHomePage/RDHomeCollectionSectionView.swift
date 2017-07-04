@@ -17,6 +17,7 @@ class RDHomeCollectionSectionView: UICollectionReusableView {
         
         imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: 120))
         imageView.contentMode = UIViewContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.image = UIImage(named: "banner")
         self.addSubview(imageView)
     }
