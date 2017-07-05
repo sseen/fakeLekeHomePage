@@ -5,6 +5,7 @@
 //  Created by sseen on 2017/7/4.
 //  Copyright © 2017年 sseen. All rights reserved.
 //
+import RxSwift
 
 struct K {
     struct NotificationKey {
@@ -19,6 +20,10 @@ struct K {
     struct ViewSize {
         static let SCREEN_WIDTH  = UIScreen.main.bounds.size.width
         static let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
+    }
+    
+    struct Rx {
+        static  let disposeBag = DisposeBag()
     }
 }
 

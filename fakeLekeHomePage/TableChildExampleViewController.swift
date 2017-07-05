@@ -55,6 +55,10 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
         if blackTheme {
             tableView.backgroundColor = UIColor(red: 15/255.0, green: 16/255.0, blue: 16/255.0, alpha: 1.0)
         }
+        
+        tableView.rx.contentOffset.map {$0.y}.subscribe{ [weak self] in
+            self?.title = "\($0)"
+            }.disposed(by: K.Rx.disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -104,14 +108,14 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
             
         case .began:
             
-            scrollView.delegate?.scrollViewDidEndDecelerating!(scrollView)
+            delegate.scrollEndDeceleratingWithTable(scrollView.contentOffset, velocity: self.velocity, table: self.view)
             
             // User began dragging
             break
             
         case .changed:
             
-            scrollView.delegate?.scrollViewDidEndDecelerating!(scrollView)
+            delegate.scrollEndDeceleratingWithTable(scrollView.contentOffset, velocity: self.velocity, table: self.view)
             
             // User is currently dragging the scroll view
             break
@@ -119,7 +123,7 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
         case .possible:
             
             if (scrollView.contentOffset.y<10) {
-                scrollView.delegate?.scrollViewDidEndDecelerating!(scrollView)
+                delegate.scrollEndDeceleratingWithTable(scrollView.contentOffset, velocity: self.velocity, table: self.view)
             }
             
             // The scroll view scrolling but the user is no longer touching the scrollview (table is decelerating)
@@ -138,9 +142,6 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
         }
         //}
 
-    }
-    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        delegate.scrollEndDeceleratingWithTable(scrollView.contentOffset, velocity: self.velocity, table: self.view)
     }
 
     // MARK: - IndicatorInfoProvider
