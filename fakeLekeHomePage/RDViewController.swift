@@ -31,7 +31,6 @@ struct CommonUnit {
 }
 
 typealias NumberSection = AnimatableSectionModel<String, Int>
-private let disposeBag = DisposeBag()
 
 class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
@@ -97,9 +96,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         }
         self.sections.asObservable()
             .bind(to: mainCollection.rx.items(dataSource: cvReloadDataSource))
-            .disposed(by: disposeBag)
-        
-        
+            .disposed(by: K.Rx.disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {

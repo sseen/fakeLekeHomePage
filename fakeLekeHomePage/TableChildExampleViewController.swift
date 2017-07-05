@@ -101,22 +101,17 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
         
         self.velocity = velocityY < 0 ? true : false;
         
-        //if ([scrollView isEqual:_mainTable]) {
-        
-        
         switch (scrollView.panGestureRecognizer.state) {
             
         case .began:
             
             delegate.scrollEndDeceleratingWithTable(scrollView.contentOffset, velocity: self.velocity, table: self.view)
-            
             // User began dragging
             break
             
         case .changed:
             
             delegate.scrollEndDeceleratingWithTable(scrollView.contentOffset, velocity: self.velocity, table: self.view)
-            
             // User is currently dragging the scroll view
             break
             
@@ -125,7 +120,6 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
             if (scrollView.contentOffset.y<10) {
                 delegate.scrollEndDeceleratingWithTable(scrollView.contentOffset, velocity: self.velocity, table: self.view)
             }
-            
             // The scroll view scrolling but the user is no longer touching the scrollview (table is decelerating)
             break
             
@@ -133,15 +127,9 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
             
             break;
             
-            
         default:
-            
             break;
-            
-            
         }
-        //}
-
     }
 
     // MARK: - IndicatorInfoProvider
