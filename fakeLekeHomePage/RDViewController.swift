@@ -37,7 +37,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     
     var headerVIewDel:UIView!
     var mainCollection:UICollectionView!
-    var isUp = HomeHeaderState.hided
+    var isUp = HomeHeaderState.showing
     var velocity = false
     var upMoveOffset:CGFloat = 0
     let commonUse = CommonUnit()
@@ -79,12 +79,30 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         mainCollection.rx.contentOffset
             .map { $0.y}
             .subscribe{ [weak self] in
-                var frameDown = self?.vc.view.frame
                 
-                self?.navigationController?.navigationBar.alpha = (1 + $0.element!/(44))
-                // frame?.size.height =
-                frameDown?.origin.y = frameHeight - $0.element!
-                self?.vc.view.frame = frameDown!
+                if $0.element! > CGFloat(0) && self?.isUp == .showing{
+                    let table = self?.vc.view
+                    
+                    UIView.animate(withDuration: (self?.commonUse.animationTime)!, delay: (self?.commonUse.delayTime)!, options: .curveLinear, animations: {
+                        self?.headerVIewDel.frame = CGRect(x: 0, y: -140, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
+                        table?.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: 500
+                        )
+                        
+                        self?.changeTabStripView(show: true)
+                        
+                    }, completion: nil)
+                    
+                    if self?.isUp == .showing {
+                        self?.isUp = .hided
+                    }
+                } else {
+                    var frameDown = self?.vc.view.frame
+                    
+                    self?.navigationController?.navigationBar.alpha = (1 + $0.element!/(44))
+                    // frame?.size.height =
+                    frameDown?.origin.y = frameHeight - $0.element!
+                    self?.vc.view.frame = frameDown!
+                }
                 
         }.disposed(by: K.Rx.disposeBag)
         // rx data
