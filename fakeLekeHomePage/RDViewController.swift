@@ -40,6 +40,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     var velocity = false
     var upMoveOffset:CGFloat = 0
     let commonUse = CommonUnit()
+    var vc:ButtonBarExampleViewController!
     
     var sections = Variable([NumberSection]())
     static let initialValue: [AnimatableSectionModel<String, Int>] = [
@@ -63,7 +64,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         self.view.addSubview(mainCollection)
         self.headerVIewDel = mainCollection;
         
-        let vc = ButtonBarExampleViewController(delegate: self)
+        vc = ButtonBarExampleViewController(delegate: self)
         vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: mainCollection.frame.height)
         self.addChildViewController(vc)
         self.view.addSubview(vc.view)
@@ -171,6 +172,8 @@ extension RDViewController:nextHomeScrollDelegate {
                 UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
                     self.headerVIewDel.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: headerHeight)
                     table.frame = CGRect(x:0, y:headerHeight, width:K.ViewSize.SCREEN_WIDTH, height:tableHeight)
+                    
+                    self.changeTabStripView(show: false)
                 }, completion: nil)
                 
                 isUp = .showing
@@ -185,6 +188,8 @@ extension RDViewController:nextHomeScrollDelegate {
                     UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
                         self.headerVIewDel.frame = CGRect(x: 0, y: -self.commonUse.bannerHeight, width: K.ViewSize.SCREEN_WIDTH, height: headerHeight)
                         table.frame = CGRect(x: 0, y: headerHeight - self.commonUse.bannerHeight, width: K.ViewSize.SCREEN_WIDTH, height: tableHeight)
+                        
+                        self.changeTabStripView(show: false)
                     }, completion: nil)
                     
                     upMoveOffset = yOffset
@@ -198,12 +203,21 @@ extension RDViewController:nextHomeScrollDelegate {
             UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
                 self.headerVIewDel.frame = CGRect(x: 0, y: -self.commonUse.navPlusStatus - headerHeight, width: K.ViewSize.SCREEN_WIDTH, height: headerHeight)
                 table.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: tableHeight)
+                
+                self.changeTabStripView(show: true)
+                
             }, completion: nil)
             
             if isUp == .showing {
                 isUp = .hided
             }
         }
+    }
+    
+    func changeTabStripView(show isShow:Bool) {
+        var frame = self.vc.buttonBarView.frame
+        frame.size.height = isShow ? 44.0 : 0.0
+        self.vc.buttonBarView.frame = frame
     }
 
 }
