@@ -70,7 +70,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
                     
                     if $0.element! > CGFloat(0) {
                         UIView.animate(withDuration: RD.CommonUnit.animationTime, delay: RD.CommonUnit.delayTime, options: .curveLinear, animations: {
-                            self?.headerVIewDel.frame = CGRect(x: 0, y: -240, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
+                            self?.headerVIewDel.frame = CGRect(x: 0, y: -RD.CommonUnit.bannerPlusIconsHeight, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
                             table.frame = CGRect(x: 0, y: 64, width: K.ViewSize.SCREEN_WIDTH, height: table.frame.size.height)
                             self?.changeTabStripView(show: true)
                         }, completion: {finished in
