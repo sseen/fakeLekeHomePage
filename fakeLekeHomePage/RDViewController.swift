@@ -11,25 +11,6 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-enum HomeHeaderState{
-    case hided
-    case showing
-    case partial
-}
-
-struct CommonUnit {
-    let marginItem = 20
-    let navPlusStatus:CGFloat = 64
-    let animationTime:TimeInterval = 0.33
-    let delayTime:TimeInterval = 0
-    let bannerHeight:CGFloat = 120
-    let bannerPlusIconsHeight:CGFloat = 120 * 2
-    let navbar_change_point = 50
-    let cellReuse = "cell0"
-    let headerReuse = "headerView"
-    
-    let color = UIColor(colorLiteralRed: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
-}
 
 typealias NumberSection = AnimatableSectionModel<String, Int>
 
@@ -37,10 +18,9 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     
     var headerVIewDel:UIView!
     var mainCollection:UICollectionView!
-    var isUp = HomeHeaderState.showing
+    var isUp = RD.HomeHeaderState.showing
     var velocity = false
     var upMoveOffset:CGFloat = 0
-    let commonUse = CommonUnit()
     var vc:ButtonBarExampleViewController!
     
     var sections = Variable([NumberSection]())
@@ -56,61 +36,66 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         self.navigationController?.navigationBar.isTranslucent = true
         
         let layout = UICollectionViewFlowLayout()
-        layout.headerReferenceSize = CGSize(width: K.ViewSize.SCREEN_WIDTH, height:commonUse.bannerHeight)
-        mainCollection = UICollectionView(frame: CGRect(x: 0, y: commonUse.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT), collectionViewLayout: layout)
-        mainCollection.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.itemSize = CGSize(width: self.itemWidth(), height: RD.CommonUnit.bannerHeight / 2)
+        layout.headerReferenceSize = CGSize(width: K.ViewSize.SCREEN_WIDTH, height:RD.CommonUnit.bannerHeight)
+        mainCollection = UICollectionView(frame: CGRect(x: 0, y: RD.CommonUnit.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT), collectionViewLayout: layout)
         mainCollection.bounces = true
         mainCollection.alwaysBounceVertical = true
         mainCollection.backgroundColor = UIColor.white
         mainCollection.delegate = self
-        mainCollection.register(RDHomeCollectionViewCell.self, forCellWithReuseIdentifier: commonUse.cellReuse)
-        mainCollection.register(RDHomeCollectionSectionView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: commonUse.headerReuse)
+        mainCollection.register(RDHomeCollectionViewCell.self, forCellWithReuseIdentifier: RD.CommonUnit.cellReuse)
+        mainCollection.register(RDHomeCollectionSectionView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: RD.CommonUnit.headerReuse)
 
         self.view.addSubview(mainCollection)
         self.headerVIewDel = mainCollection;
         
         vc = ButtonBarExampleViewController(delegate: self)
-        vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: commonUse.bannerPlusIconsHeight + commonUse.navPlusStatus)
+        vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: RD.CommonUnit.bannerPlusIconsHeight + RD.CommonUnit.navPlusStatus)
         self.addChildViewController(vc)
         self.view.addSubview(vc.view)
         vc.didMove(toParentViewController: self)
         
         let frameHeight = self.vc.view.frame.origin.y
         mainCollection.rx.contentOffset
+            .observeOn(MainScheduler.asyncInstance)
             .map { $0.y}
             .subscribe{ [weak self] in
                 
-                if $0.element! > CGFloat(0) && self?.isUp == .showing{
-                    let table = self?.vc.view
+                let table:UIView = (self?.vc.view)!
+                // scroll up collectionview
+                if self?.isUp == .showing {
                     
-                    UIView.animate(withDuration: (self?.commonUse.animationTime)!, delay: (self?.commonUse.delayTime)!, options: .curveLinear, animations: {
-                        self?.headerVIewDel.frame = CGRect(x: 0, y: -140, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
-                        table?.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: 500
-                        )
-                        
-                        self?.changeTabStripView(show: true)
-                        
-                    }, completion: nil)
-                    
-                    if self?.isUp == .showing {
-                        self?.isUp = .hided
+                    if $0.element! > CGFloat(0) {
+                        UIView.animate(withDuration: RD.CommonUnit.animationTime, delay: RD.CommonUnit.delayTime, options: .curveLinear, animations: {
+                            self?.headerVIewDel.frame = CGRect(x: 0, y: -240, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
+                            table.frame = CGRect(x: 0, y: 64, width: K.ViewSize.SCREEN_WIDTH, height: table.frame.size.height)
+                            self?.changeTabStripView(show: true)
+                        }, completion: {finished in
+                            if self?.isUp == .showing {
+                                self?.isUp = .hided
+                                print("oo")
+                            }
+                        })
                     }
-                } else {
-                    var frameDown = self?.vc.view.frame
-                    
-                    self?.navigationController?.navigationBar.alpha = (1 + $0.element!/(44))
-                    // frame?.size.height =
-                    frameDown?.origin.y = frameHeight - $0.element!
-                    self?.vc.view.frame = frameDown!
+                    // table down
+                    if $0.element! < CGFloat(0)  {
+                        var frameDown = self?.vc.view.frame
+                        self?.navigationController?.navigationBar.alpha = (1 + $0.element!/(44))
+                        frameDown?.origin.y = frameHeight - $0.element!
+                        self?.vc.view.frame = frameDown!
+                    }
                 }
-                
-        }.disposed(by: K.Rx.disposeBag)
+            }.disposed(by: K.Rx.disposeBag)
+        
         // rx data
         self.sections.value = RDViewController.initialValue
         let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<NumberSection>()
         // cell
         cvReloadDataSource.configureCell = { (_, cv, ip, i) in
-            let cell = cv.dequeueReusableCell(withReuseIdentifier: self.commonUse.cellReuse, for: ip) as! RDHomeCollectionViewCell
+            let cell = cv.dequeueReusableCell(withReuseIdentifier: RD.CommonUnit.cellReuse, for: ip) as! RDHomeCollectionViewCell
             cell.textLabel.text = "\(i)"
             cell.backgroundColor = UIColor.darkGray
             
@@ -122,7 +107,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
             var section:UICollectionReusableView! = nil
             
             if kind == UICollectionElementKindSectionHeader {
-                section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.commonUse.headerReuse, for: ip) as! RDHomeCollectionSectionView
+                section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RD.CommonUnit.headerReuse, for: ip) as! RDHomeCollectionSectionView
             }
             if kind == UICollectionElementKindSectionFooter {
                 section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: ip) as! RDHomeCollectionSectionView
@@ -135,63 +120,18 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
             .disposed(by: K.Rx.disposeBag)
     }
     
+    // MARK: - life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
     }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        // self.navigationController?.navigationBar.lt_reset()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - flow
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: K.ViewSize.SCREEN_WIDTH, height: commonUse.bannerHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.itemWidth()
-        return CGSize(width: width, height: commonUse.bannerHeight/2) // two lines两排
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return self.itemSpacing()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-    }
-    
-    func itemSpacing() -> CGFloat {
-        let cellsInLine:CGFloat = 4
-        let width = self.itemWidth()
-        // item space
-        let spacing = ( self.view.frame.width - cellsInLine * width - CGFloat(commonUse.marginItem * 2 ) ) / (cellsInLine - 1)
-        
-        return spacing
-    }
     
     func itemWidth() -> CGFloat {
-        let cellsInLine:CGFloat = 6
-        let width = roundf(Float((self.view.frame.width - cellsInLine + 1.0) / cellsInLine))
-        return CGFloat(width)
+        let items:CGFloat = 4
+        let width = self.view.frame.width  / items
+        return width
     }
 }
 
@@ -199,14 +139,16 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
 extension RDViewController:nextHomeScrollDelegate {
     func nextScrollEndDeceleratingWithTable(_ contentOffset: CGPoint, velocity: Bool, table: UIView) {
         let yOffset = contentOffset.y
-        let headerHeight = commonUse.bannerPlusIconsHeight
+        let headerHeight = RD.CommonUnit.bannerPlusIconsHeight
         let tableHeight = self.view.frame.height
+        
+        print(table.frame)
         
         if isUp != .showing && !velocity {
             if contentOffset.y < 10 {
-                UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
-                    self.headerVIewDel.frame = CGRect(x: 0, y: self.commonUse.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
-                    table.frame = CGRect(x:0, y:headerHeight + self.commonUse.navPlusStatus, width:K.ViewSize.SCREEN_WIDTH, height:tableHeight)
+                UIView.animate(withDuration: RD.CommonUnit.animationTime, delay: RD.CommonUnit.delayTime, options: .curveLinear, animations: {
+                    self.headerVIewDel.frame = CGRect(x: 0, y: RD.CommonUnit.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
+                    table.frame = CGRect(x:0, y:headerHeight + RD.CommonUnit.navPlusStatus, width:K.ViewSize.SCREEN_WIDTH, height:tableHeight)
                     
                     self.changeTabStripView(show: false)
                 }, completion: nil)
@@ -220,9 +162,9 @@ extension RDViewController:nextHomeScrollDelegate {
                 }
                 
                 if upMoveOffset - yOffset > 40 * 1.5 {
-                    UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
-                        self.headerVIewDel.frame = CGRect(x: 0, y: -self.commonUse.bannerHeight + self.commonUse.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
-                        table.frame = CGRect(x: 0, y: headerHeight - self.commonUse.bannerHeight + self.commonUse.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: tableHeight)
+                    UIView.animate(withDuration: RD.CommonUnit.animationTime, delay: RD.CommonUnit.delayTime, options: .curveLinear, animations: {
+                        self.headerVIewDel.frame = CGRect(x: 0, y: -RD.CommonUnit.bannerHeight + RD.CommonUnit.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
+                        table.frame = CGRect(x: 0, y: headerHeight - RD.CommonUnit.bannerHeight + RD.CommonUnit.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: tableHeight)
                         
                         self.changeTabStripView(show: false)
                     }, completion: nil)
@@ -235,9 +177,9 @@ extension RDViewController:nextHomeScrollDelegate {
         
         if velocity && yOffset > 10 {
             //scroll down, header show will hide
-            UIView.animate(withDuration: commonUse.animationTime, delay: commonUse.delayTime, options: .curveLinear, animations: {
+            UIView.animate(withDuration: RD.CommonUnit.animationTime, delay: RD.CommonUnit.delayTime, options: .curveLinear, animations: {
                 self.headerVIewDel.frame = CGRect(x: 0, y: -headerHeight, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
-                table.frame = CGRect(x: 0, y: self.commonUse.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: tableHeight)
+                table.frame = CGRect(x: 0, y: RD.CommonUnit.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: tableHeight)
                 
                 self.changeTabStripView(show: true)
                 
