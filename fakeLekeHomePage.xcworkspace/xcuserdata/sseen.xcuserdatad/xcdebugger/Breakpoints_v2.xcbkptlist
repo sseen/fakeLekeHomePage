@@ -57,78 +57,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/XLPagerTabStrip/Sources/ButtonBarPagerTabStripViewController.swift"
-            timestampString = "521006176.60227"
+            filePath = "fakeLekeHomePage/RDHomeCollectionFlowLayout.swift"
+            timestampString = "521380739.98265"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "buttonBarView"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "fakeLekeHomePage/RDViewController.swift"
-            timestampString = "521027760.681582"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "nextScrollEndDeceleratingWithTable(_:velocity:table:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "layoutAttributesForSupplementaryView(ofKind:at:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "fakeLekeHomePage/RDViewController.swift"
-            timestampString = "521027760.681582"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
-            landmarkName = "nextScrollEndDeceleratingWithTable(_:velocity:table:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fakeLekeHomePage.RDViewController.nextScrollEndDeceleratingWithTable (__C.CGPoint, velocity : Swift.Bool, table : __ObjC.UIView) -&gt; ()"
-                  moduleName = "fakeLekeHomePage"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zyang/SNProject/fakeLekeHomePage/fakeLekeHomePage/RDViewController.swift"
-                  timestampString = "521028050.143808"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "238"
-                  endingLineNumber = "238"
-                  offsetFromSymbolStart = "3553">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fakeLekeHomePage.RDViewController.(nextScrollEndDeceleratingWithTable (__C.CGPoint, velocity : Swift.Bool, table : __ObjC.UIView) -&gt; ()).(closure #3)"
-                  moduleName = "fakeLekeHomePage"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zyang/SNProject/fakeLekeHomePage/fakeLekeHomePage/RDViewController.swift"
-                  timestampString = "521028050.146542"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "239"
-                  endingLineNumber = "239"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

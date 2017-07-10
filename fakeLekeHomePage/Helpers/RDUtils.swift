@@ -27,6 +27,35 @@ struct K {
     }
 }
 
+struct RD {
+    
+    enum HomeHeaderState{
+        case hided
+        case showing
+        case partial
+    }
+    
+    struct CommonUnit {
+        static let marginItem = 20
+        static let navPlusStatus:CGFloat = 64
+        static let animationTime:TimeInterval = 0.33
+        static let delayTime:TimeInterval = 0
+        static let bannerHeight:CGFloat = 120
+        static let bannerPlusIconsHeight:CGFloat = 120 * 2
+        static let navbar_change_point = 50
+        static let cellReuse = "cell0"
+        static let headerReuse = "headerView"
+        
+        static let color = UIColor(colorLiteralRed: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
+    }
+    
+    struct CustomCollection {
+        static let DayHeaderHeight = CommonUnit.bannerHeight
+        static let HourHeaderWidth = CommonUnit.bannerHeight * 0.5
+        static let DaysPerWeek = 4
+    }
+}
+
 extension UIColor {
     // Usage: UIColor(hex: 0xFC0ACE)
     convenience init(hex: Int) {
