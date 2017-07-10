@@ -36,6 +36,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         self.navigationController?.navigationBar.isTranslucent = true
         
         let layout = RDHomeCollectionFlowLayout()
+        layout.datas = RDViewController.initialValue
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0

@@ -10,6 +10,8 @@ import UIKit
 
 class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
     
+    var datas:[NumberSection] = [NumberSection]()
+    
     override var collectionViewContentSize:CGSize {
         
         let contentWidth = self.collectionView?.bounds.size.width
@@ -32,7 +34,7 @@ class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
         // Supplementary views
         let headerIndexPaths = self.indexPathsHeaderViewsInRect(rect)
         for indexPath in headerIndexPaths {
-            let attributes = self.layoutAttributesForSupplementaryView(ofKind: "", at: indexPath)
+            let attributes = self.layoutAttributesForSupplementaryView(ofKind: RD.CommonUnit.headerReuse, at: indexPath)
             layoutAttributes.append(attributes!)
         }
         
@@ -40,11 +42,9 @@ class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
     }
     
     func indexPathsOfItemsInRect(_ rect:CGRect) -> [IndexPath] {
-        let dataSource = self.collectionView?.dataSource // as! RxCollectionViewSectionedReloadDataSource<NumberSection>
         var indexPaths = [IndexPath]()
-        if (dataSource?.numberOfSections!(in: collectionView!))!
-            > 0 {
-            for index in dataSource[0].items {
+        if datas.count > 0 {
+            for index in datas[0].items {
                 let a_index = IndexPath(item: index, section: 0)
                 indexPaths.append(a_index)
             }
@@ -77,7 +77,7 @@ class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, with: indexPath)
         
-        if elementKind == "" {
+        if elementKind == RD.CommonUnit.headerReuse {
             attributes.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: RD.CommonUnit.bannerHeight)
         } else {
             attributes.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: 0)
