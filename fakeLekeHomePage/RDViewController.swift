@@ -37,11 +37,11 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         
         let layout = RDHomeCollectionFlowLayout()
         layout.datas = RDViewController.initialValue
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.itemSize = CGSize(width: self.itemWidth(), height: RD.CommonUnit.bannerHeight / 2)
-        layout.headerReferenceSize = CGSize(width: K.ViewSize.SCREEN_WIDTH, height:RD.CommonUnit.bannerHeight)
+//        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+//        layout.minimumLineSpacing = 0
+//        layout.minimumInteritemSpacing = 0
+//        layout.itemSize = CGSize(width: self.itemWidth(), height: RD.CommonUnit.bannerHeight / 2)
+//        layout.headerReferenceSize = CGSize(width: K.ViewSize.SCREEN_WIDTH, height:RD.CommonUnit.bannerHeight)
         mainCollection = UICollectionView(frame: CGRect(x: 0, y: RD.CommonUnit.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT), collectionViewLayout: layout)
         mainCollection.bounces = true
         mainCollection.alwaysBounceVertical = true
@@ -105,14 +105,14 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         // section
         cvReloadDataSource.supplementaryViewFactory = { (dataSource, cv, kind, ip) in
             
-            var section:UICollectionReusableView! = nil
+            var section:UICollectionReusableView! 
             
-            if kind == UICollectionElementKindSectionHeader {
+//            if kind == UICollectionElementKindSectionHeader {
                 section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RD.CommonUnit.headerReuse, for: ip) as! RDHomeCollectionSectionView
-            }
-            if kind == UICollectionElementKindSectionFooter {
-                section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: ip) as! RDHomeCollectionSectionView
-            }
+//            }
+//            if kind == UICollectionElementKindSectionFooter {
+//                section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: ip) as! RDHomeCollectionSectionView
+//            }
             
             return section
         }

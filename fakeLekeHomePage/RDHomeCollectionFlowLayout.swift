@@ -54,7 +54,7 @@ class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
     }
     
     func indexPathsHeaderViewsInRect(_ rect:CGRect) -> [IndexPath] {
-        var indexPaths = [IndexPath()]
+        var indexPaths:[IndexPath] = []
         if rect.minY <= RD.CustomCollection.DayHeaderHeight {
             
             let aIndexPath = IndexPath(item: 0, section: 0)
@@ -75,6 +75,7 @@ class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        print("oo")
         let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, with: indexPath)
         
         if elementKind == RD.CommonUnit.headerReuse {
