@@ -10,6 +10,15 @@ import UIKit
 
 class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
     
+    override var collectionViewContentSize:CGSize {
+        
+        let contentWidth = self.collectionView?.bounds.size.width
+        let contentHeight = RD.CustomCollection.DayHeaderHeight * 2// (HeightPerHour * HoursPerDay)
+        let contentSize = CGSize(width: contentWidth!, height: contentHeight)
+        
+        return contentSize
+    }
+    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         
@@ -21,15 +30,20 @@ class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
         }
         
         // Supplementary views
-        let headerIndexPaths =
+        let headerIndexPaths = self.indexPathsHeaderViewsInRect(rect)
+        for indexPath in headerIndexPaths {
+            let attributes = self.layoutAttributesForSupplementaryView(ofKind: "", at: indexPath)
+            layoutAttributes.append(attributes!)
+        }
         
         return layoutAttributes
     }
     
     func indexPathsOfItemsInRect(_ rect:CGRect) -> [IndexPath] {
-        let dataSource = self.collectionView?.dataSource as! RxCollectionViewSectionedReloadDataSource<NumberSection>
+        let dataSource = self.collectionView?.dataSource // as! RxCollectionViewSectionedReloadDataSource<NumberSection>
         var indexPaths = [IndexPath]()
-        if dataSource._rx_numberOfSections(in: self.collectionView!) > 0 {
+        if (dataSource?.numberOfSections!(in: collectionView!))!
+            > 0 {
             for index in dataSource[0].items {
                 let a_index = IndexPath(item: index, section: 0)
                 indexPaths.append(a_index)
@@ -40,7 +54,41 @@ class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
     }
     
     func indexPathsHeaderViewsInRect(_ rect:CGRect) -> [IndexPath] {
+        var indexPaths = [IndexPath()]
+        if rect.minY <= RD.CustomCollection.DayHeaderHeight {
+            
+            let aIndexPath = IndexPath(item: 0, section: 0)
+            indexPaths.append(aIndexPath)
+        }
         
+        return indexPaths
     }
-
+    
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+        attributes.frame = CGRect(x: (self.itemWidth() + 1 ) * (CGFloat)(indexPath.item) ,
+                                  y: RD.CustomCollection.HourHeaderWidth * (CGFloat)(indexPath.item % 4),
+                                  width: self.itemWidth(),
+                                  height: RD.CustomCollection.HourHeaderWidth)
+        
+        return attributes
+    }
+    
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, with: indexPath)
+        
+        if elementKind == "" {
+            attributes.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: RD.CommonUnit.bannerHeight)
+        } else {
+            attributes.frame = CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: 0)
+        }
+        
+        return attributes
+    }
+    
+    func itemWidth() -> CGFloat {
+        let items:CGFloat = 4
+        let width = ( K.ViewSize.SCREEN_WIDTH - (items - 1) ) / items
+        return width
+    }
 }

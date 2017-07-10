@@ -35,7 +35,7 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.isTranslucent = true
         
-        let layout = UICollectionViewFlowLayout()
+        let layout = RDHomeCollectionFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0

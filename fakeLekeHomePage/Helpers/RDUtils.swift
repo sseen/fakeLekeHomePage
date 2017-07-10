@@ -48,6 +48,12 @@ struct RD {
         
         static let color = UIColor(colorLiteralRed: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
     }
+    
+    struct CustomCollection {
+        static let DayHeaderHeight = CommonUnit.bannerHeight
+        static let HourHeaderWidth = CommonUnit.bannerHeight * 0.5
+        static let DaysPerWeek = 4
+    }
 }
 
 extension UIColor {
