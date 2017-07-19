@@ -14,7 +14,7 @@ import RxDataSources
 
 typealias NumberSection = AnimatableSectionModel<String, Int>
 
-class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+class RDViewController: UIViewController {
     
     var headerVIewDel:UIView!
     var mainCollection:UICollectionView!
@@ -25,9 +25,11 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
     
     var sections = Variable([NumberSection]())
     static let initialValue: [AnimatableSectionModel<String, Int>] = [
-        NumberSection(model: "section 1", items: [1, 2, 3, 4, 5, 6])
+        NumberSection(model: "section 1", items: [1, 2, 3, 4, 5])
     ]
-
+    
+    
+    // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,18 +37,10 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.isTranslucent = true
         
-        let layout = RDHomeCollectionFlowLayout()
-        layout.datas = RDViewController.initialValue
-//        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
-//        layout.minimumLineSpacing = 0
-//        layout.minimumInteritemSpacing = 0
-//        layout.itemSize = CGSize(width: self.itemWidth(), height: RD.CommonUnit.bannerHeight / 2)
-//        layout.headerReferenceSize = CGSize(width: K.ViewSize.SCREEN_WIDTH, height:RD.CommonUnit.bannerHeight)
-        mainCollection = UICollectionView(frame: CGRect(x: 0, y: RD.CommonUnit.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT), collectionViewLayout: layout)
+        mainCollection = UICollectionView(frame: CGRect(x: 0, y: RD.CommonUnit.navPlusStatus, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT), collectionViewLayout: UICollectionViewFlowLayout())
         mainCollection.bounces = true
         mainCollection.alwaysBounceVertical = true
         mainCollection.backgroundColor = UIColor.white
-        mainCollection.delegate = self
         mainCollection.register(RDHomeCollectionViewCell.self, forCellWithReuseIdentifier: RD.CommonUnit.cellReuse)
         mainCollection.register(RDHomeCollectionSectionView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: RD.CommonUnit.headerReuse)
 
@@ -77,7 +71,6 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
                         }, completion: {finished in
                             if self?.isUp == .showing {
                                 self?.isUp = .hided
-                                print("oo")
                             }
                         })
                     }
@@ -95,7 +88,9 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         self.sections.value = RDViewController.initialValue
         let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<NumberSection>()
         // cell
-        cvReloadDataSource.configureCell = { (_, cv, ip, i) in
+        cvReloadDataSource.configureCell = { (datasouce, cv, ip, i) in
+            print(datasouce.sectionModels)
+            
             let cell = cv.dequeueReusableCell(withReuseIdentifier: RD.CommonUnit.cellReuse, for: ip) as! RDHomeCollectionViewCell
             cell.textLabel.text = "\(i)"
             cell.backgroundColor = UIColor.darkGray
@@ -105,34 +100,34 @@ class RDViewController: UIViewController, UICollectionViewDelegateFlowLayout, UI
         // section
         cvReloadDataSource.supplementaryViewFactory = { (dataSource, cv, kind, ip) in
             
-            var section:UICollectionReusableView! 
+            var section:UICollectionReusableView!
             
-//            if kind == UICollectionElementKindSectionHeader {
-                section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RD.CommonUnit.headerReuse, for: ip) as! RDHomeCollectionSectionView
-//            }
-//            if kind == UICollectionElementKindSectionFooter {
-//                section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: ip) as! RDHomeCollectionSectionView
-//            }
+                if kind == UICollectionElementKindSectionHeader {
+                    section = cv.dequeueReusableSupplementaryView(ofKind: kind , withReuseIdentifier: RD.CommonUnit.headerReuse, for: ip) as! RDHomeCollectionSectionView
+                }
+                if kind == UICollectionElementKindSectionFooter {
+                    section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: ip) as! RDHomeCollectionSectionView
+                }
             
             return section
-        }
+         }
+        
         self.sections.asObservable()
+            .asObservable().observeOn(MainScheduler.instance)
             .bind(to: mainCollection.rx.items(dataSource: cvReloadDataSource))
             .disposed(by: K.Rx.disposeBag)
+        
+        
+        if let _ = mainCollection.collectionViewLayout as? UICollectionViewFlowLayout{
+            
+            let layout = RDHomeCollectionFlowLayout();
+            mainCollection.collectionViewLayout = layout
+        }
     }
     
-    // MARK: - life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-    }
-
-    // MARK: - flow
-    
-    func itemWidth() -> CGFloat {
-        let items:CGFloat = 4
-        let width = self.view.frame.width  / items
-        return width
     }
 }
 

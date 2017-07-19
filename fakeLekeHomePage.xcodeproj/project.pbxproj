@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7DC886147996E14B86FBFC2B /* Pods_fakeLekeHomePage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3DEB843362CED67F05077F /* Pods_fakeLekeHomePage.framework */; };
-		9203FE181F0B47AF0078C76C /* RxCollectionViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203FE171F0B47AF0078C76C /* RxCollectionViewSectionedReloadDataSource.swift */; };
 		9203FE1A1F0B76AB0078C76C /* RDHomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203FE191F0B76AB0078C76C /* RDHomeCollectionViewCell.swift */; };
 		9203FE1C1F0B775A0078C76C /* RDHomeCollectionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203FE1B1F0B775A0078C76C /* RDHomeCollectionSectionView.swift */; };
 		9203FE1E1F0B7B5C0078C76C /* RDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203FE1D1F0B7B5C0078C76C /* RDUtils.swift */; };
@@ -33,7 +32,6 @@
 /* Begin PBXFileReference section */
 		2B396A66FC867DD88D19A0FB /* Pods-fakeLekeHomePage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fakeLekeHomePage.release.xcconfig"; path = "Pods/Target Support Files/Pods-fakeLekeHomePage/Pods-fakeLekeHomePage.release.xcconfig"; sourceTree = "<group>"; };
 		3EF0EC3DD7125FFEBC10746B /* Pods-fakeLekeHomePage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fakeLekeHomePage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fakeLekeHomePage/Pods-fakeLekeHomePage.debug.xcconfig"; sourceTree = "<group>"; };
-		9203FE171F0B47AF0078C76C /* RxCollectionViewSectionedReloadDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCollectionViewSectionedReloadDataSource.swift; sourceTree = "<group>"; };
 		9203FE191F0B76AB0078C76C /* RDHomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDHomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		9203FE1B1F0B775A0078C76C /* RDHomeCollectionSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDHomeCollectionSectionView.swift; sourceTree = "<group>"; };
 		9203FE1D1F0B7B5C0078C76C /* RDUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDUtils.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				92FCB95A1EE5055A0051710B /* TableChildExampleViewController.swift */,
 				92B93C921EE4FC0C002B9A13 /* fakeLekeHomePage-Bridging-Header.h */,
 				92AA7F441EF134C9009DBE57 /* RDViewController.swift */,
-				9203FE171F0B47AF0078C76C /* RxCollectionViewSectionedReloadDataSource.swift */,
 				92F826491F0F7D8500A85370 /* RDHomeCollectionFlowLayout.swift */,
 				9203FE191F0B76AB0078C76C /* RDHomeCollectionViewCell.swift */,
 				9203FE1B1F0B775A0078C76C /* RDHomeCollectionSectionView.swift */,
@@ -286,7 +283,6 @@
 				92B93C941EE4FC0D002B9A13 /* TestViewController.swift in Sources */,
 				92ACD24C1EB98A0E00AA6FBA /* BannerCollectionReusableView.m in Sources */,
 				92F27C6E1EB32DD300D98CA8 /* AppDelegate.m in Sources */,
-				9203FE181F0B47AF0078C76C /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
 				92FCB95B1EE5055A0051710B /* ChildExampleViewController.swift in Sources */,
 				92FCB9631EE5078C0051710B /* DataProvider.swift in Sources */,
 				9203FE1A1F0B76AB0078C76C /* RDHomeCollectionViewCell.swift in Sources */,
