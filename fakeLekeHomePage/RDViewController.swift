@@ -118,11 +118,9 @@ class RDViewController: UIViewController {
             .disposed(by: K.Rx.disposeBag)
         
         
-        if let _ = mainCollection.collectionViewLayout as? UICollectionViewFlowLayout{
-            
-            let layout = RDHomeCollectionFlowLayout();
-            mainCollection.collectionViewLayout = layout
-        }
+        let layout = RDHomeCollectionFlowLayout();
+        mainCollection.collectionViewLayout = layout
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
