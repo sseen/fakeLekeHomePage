@@ -10,6 +10,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import SwiftMessages
+
+import ObjectMapper
 
 
 typealias NumberSection = AnimatableSectionModel<String, Int>
@@ -23,9 +26,12 @@ class RDViewController: UIViewController {
     var upMoveOffset:CGFloat = 0
     var vc:ButtonBarExampleViewController!
     
+    var section:RDHomeCollectionSectionView!
+    
     var sections = Variable([NumberSection]())
-    static let initialValue: [AnimatableSectionModel<String, Int>] = [
-        NumberSection(model: "section 1", items: [1, 2, 3, 4, 5])
+    var initialValue: [AnimatableSectionModel<String, Int>] = [
+        NumberSection(model: "section 1", items: [1, 2, 3, 4, 5]),
+        NumberSection(model: "section 2", items: [1, 2, 3, 4, 5])
     ]
     
     
@@ -85,7 +91,7 @@ class RDViewController: UIViewController {
             }.disposed(by: K.Rx.disposeBag)
         
         // rx data
-        self.sections.value = RDViewController.initialValue
+        self.sections.value = initialValue
         let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<NumberSection>()
         // cell
         cvReloadDataSource.configureCell = { (datasouce, cv, ip, i) in
@@ -100,16 +106,16 @@ class RDViewController: UIViewController {
         // section
         cvReloadDataSource.supplementaryViewFactory = { (dataSource, cv, kind, ip) in
             
-            var section:UICollectionReusableView!
+            // var section:UICollectionReusableView!
             
                 if kind == UICollectionElementKindSectionHeader {
-                    section = cv.dequeueReusableSupplementaryView(ofKind: kind , withReuseIdentifier: RD.CommonUnit.headerReuse, for: ip) as! RDHomeCollectionSectionView
+                    self.section = cv.dequeueReusableSupplementaryView(ofKind: kind , withReuseIdentifier: RD.CommonUnit.headerReuse, for: ip) as! RDHomeCollectionSectionView
                 }
                 if kind == UICollectionElementKindSectionFooter {
-                    section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: ip) as! RDHomeCollectionSectionView
+                    self.section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: ip) as! RDHomeCollectionSectionView
                 }
             
-            return section
+            return self.section
          }
         
         self.sections.asObservable()
@@ -121,24 +127,34 @@ class RDViewController: UIViewController {
         let layout = RDHomeCollectionFlowLayout();
         mainCollection.collectionViewLayout = layout
         
-        // @discardableResult，can dismiss this warning from build the souce code
-        GitHubProvider.request(.userRepositories("ashfurrow")).subscribe { event in
+        RDCommonUnsafeProvider.request(.scrollPageViews)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .mapObject(type: RDModelBase<RDScrollPageViewModel>.self)
+            .subscribe { event in
             switch event {
             case let .next(response):
-                print(response)
+                print("sso \(response)")
+                //let info = Mapper<RDModelBase<RDScrollPageViewModel>>().map(JSONObject: response)
+                self.section.imageNames.removeLast()
+                self.section.pagerView.reloadData()
+                //print(info)
             case let .error(error):
-                print(error)
+                RDMessage.showError(content: error.localizedDescription)
             default:
                 break
             }
         }
+
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
     }
 }
+
 
 // MARK: - next delegate
 extension RDViewController:nextHomeScrollDelegate {
