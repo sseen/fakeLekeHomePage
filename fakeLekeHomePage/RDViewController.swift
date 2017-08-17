@@ -121,6 +121,17 @@ class RDViewController: UIViewController {
         let layout = RDHomeCollectionFlowLayout();
         mainCollection.collectionViewLayout = layout
         
+        // @discardableResult，can dismiss this warning from build the souce code
+        GitHubProvider.request(.userRepositories("ashfurrow")).subscribe { event in
+            switch event {
+            case let .next(response):
+                print(response)
+            case let .error(error):
+                print(error)
+            default:
+                break
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

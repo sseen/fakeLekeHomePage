@@ -15,6 +15,7 @@
 		92ACD24C1EB98A0E00AA6FBA /* BannerCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACD24B1EB98A0E00AA6FBA /* BannerCollectionReusableView.m */; };
 		92ACD2521EB9DFA500AA6FBA /* ChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACD2511EB9DFA500AA6FBA /* ChildViewController.m */; };
 		92B93C941EE4FC0D002B9A13 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B93C931EE4FC0D002B9A13 /* TestViewController.swift */; };
+		92BEF1331F45390B00BC6888 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BEF1321F45390B00BC6888 /* GitHubAPI.swift */; };
 		92F27C6B1EB32DD300D98CA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F27C6A1EB32DD300D98CA8 /* main.m */; };
 		92F27C6E1EB32DD300D98CA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F27C6D1EB32DD300D98CA8 /* AppDelegate.m */; };
 		92F27C741EB32DD300D98CA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F27C721EB32DD300D98CA8 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		92ACD2511EB9DFA500AA6FBA /* ChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildViewController.m; sourceTree = "<group>"; };
 		92B93C921EE4FC0C002B9A13 /* fakeLekeHomePage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fakeLekeHomePage-Bridging-Header.h"; sourceTree = "<group>"; };
 		92B93C931EE4FC0D002B9A13 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		92BEF1321F45390B00BC6888 /* GitHubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		92F27C661EB32DD300D98CA8 /* fakeLekeHomePage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fakeLekeHomePage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F27C6A1EB32DD300D98CA8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92F27C6C1EB32DD300D98CA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				92B93C931EE4FC0D002B9A13 /* TestViewController.swift */,
 				92FCB95F1EE5078C0051710B /* Helpers */,
 				92FCB95D1EE5057B0051710B /* ButtonBarExampleViewController.swift */,
+				92BEF1321F45390B00BC6888 /* GitHubAPI.swift */,
 				92FCB9591EE5055A0051710B /* ChildExampleViewController.swift */,
 				92FCB95A1EE5055A0051710B /* TableChildExampleViewController.swift */,
 				92B93C921EE4FC0C002B9A13 /* fakeLekeHomePage-Bridging-Header.h */,
@@ -286,6 +289,7 @@
 				92FCB95B1EE5055A0051710B /* ChildExampleViewController.swift in Sources */,
 				92FCB9631EE5078C0051710B /* DataProvider.swift in Sources */,
 				9203FE1A1F0B76AB0078C76C /* RDHomeCollectionViewCell.swift in Sources */,
+				92BEF1331F45390B00BC6888 /* GitHubAPI.swift in Sources */,
 				92F8264A1F0F7D8500A85370 /* RDHomeCollectionFlowLayout.swift in Sources */,
 				92AA7F451EF134C9009DBE57 /* RDViewController.swift in Sources */,
 				92FCB95E1EE5057B0051710B /* ButtonBarExampleViewController.swift in Sources */,
