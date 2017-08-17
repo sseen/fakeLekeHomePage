@@ -26,6 +26,7 @@ protocol SNMessageProtocol {
     var content:String { set get }
     var defaultStyle:SNMessageStyle { get }
     func show(type:SNMessageType,style:SNMessageStyle)
+    func show(type:SNMessageType,style:SNMessageStyle,content:String)
     func hide()
 }
 

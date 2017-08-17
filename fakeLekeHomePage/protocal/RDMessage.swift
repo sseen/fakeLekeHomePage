@@ -27,13 +27,14 @@ class RDMessage:SNMessageProtocol {
     }
     
     func showError(content:String) {
-        self.content = content
-        self.show(type: .error, style: self.defaultStyle)
+        self.show(type: .error, style: self.defaultStyle, content:content)
     }
     
     // MARK: - SNMessage
     
-    func show(type: SNMessageType, style: SNMessageStyle) {
+    func show(type: SNMessageType, style: SNMessageStyle) { }
+    
+    func show(type: SNMessageType, style: SNMessageStyle , content: String) {
         // View setup
         
         let view: MessageView
@@ -46,7 +47,7 @@ class RDMessage:SNMessageProtocol {
             view = try! SwiftMessages.viewFromNib()
         }
         
-        view.configureContent(title: nil, body: self.content, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonTapHandler: { _ in SwiftMessages.hide() })
+        view.configureContent(title: nil, body: content, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonTapHandler: { _ in SwiftMessages.hide() })
         
         let iconStyle: IconStyle = .default
         
@@ -72,7 +73,7 @@ class RDMessage:SNMessageProtocol {
         
         // Config setup
         
-        let config = SwiftMessages.defaultConfig
+        var config = SwiftMessages.defaultConfig
         
         // Show
         SwiftMessages.show(config: config, view: view)

@@ -127,6 +127,8 @@ class RDViewController: UIViewController {
         let layout = RDHomeCollectionFlowLayout();
         mainCollection.collectionViewLayout = layout
         
+        RDMessage.showError(content: "ooo")
+        
         RDCommonUnsafeProvider.request(.scrollPageViews)
             .filterSuccessfulStatusCodes()
             .mapJSON()
@@ -140,7 +142,7 @@ class RDViewController: UIViewController {
                 self.section.pagerView.reloadData()
                 //print(info)
             case let .error(error):
-                RDMessage.showError(content: error.localizedDescription)
+                RDMessage.showError(content: "ooo")
             default:
                 break
             }
