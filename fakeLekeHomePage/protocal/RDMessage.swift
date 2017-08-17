@@ -23,7 +23,7 @@ class RDMessage:SNMessageProtocol {
     }
     
     var defaultStyle: SNMessageStyle {
-        return .underNav
+        return .card
     }
     
     func showError(content:String) {
@@ -39,7 +39,7 @@ class RDMessage:SNMessageProtocol {
         
         let view: MessageView
         switch style {
-        case .floatTop:
+        case .card:
             view = MessageView.viewFromNib(layout: .CardView)
         case .statusBar:
             view = MessageView.viewFromNib(layout: .StatusLine)
@@ -69,11 +69,13 @@ class RDMessage:SNMessageProtocol {
             view.button?.tintColor = UIColor.green.withAlphaComponent(0.7)
         }
         
+        view.button?.isHidden = true
         view.titleLabel?.isHidden = true
         
         // Config setup
         
         var config = SwiftMessages.defaultConfig
+        config.interactiveHide = true
         
         // Show
         SwiftMessages.show(config: config, view: view)

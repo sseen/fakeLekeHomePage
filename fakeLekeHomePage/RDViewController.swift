@@ -140,6 +140,7 @@ class RDViewController: UIViewController {
                 //let info = Mapper<RDModelBase<RDScrollPageViewModel>>().map(JSONObject: response)
                 self.section.imageNames.removeLast()
                 self.section.pagerView.reloadData()
+                //self.sections.value = [NumberSection(model: "section 1", items: [1, 2])]
                 //print(info)
             case let .error(error):
                 RDMessage.showError(content: "ooo")
@@ -154,6 +155,12 @@ class RDViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.sections.value = [NumberSection(model: "section 1", items: [1, 2])]
+        vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: -RD.CommonUnit.bannerHeight*0.5)
     }
 }
 
