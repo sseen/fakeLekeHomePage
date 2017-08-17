@@ -13,6 +13,7 @@ target 'fakeLekeHomePage' do
   pod 'RxDataSources', '~> 1.0.4'
 
   pod 'Moya/RxSwift'
+  pod 'ObjectMapper', '~> 2.2'
   pod 'SwiftMessages'
   pod 'FSPagerView'
   
