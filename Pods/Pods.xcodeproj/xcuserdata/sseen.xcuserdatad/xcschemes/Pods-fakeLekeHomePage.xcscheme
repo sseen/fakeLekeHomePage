@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7DE5D461E5D2436EC0AA3438468EF7DD"
+               BlueprintIdentifier = "5CD7AAFD40C5C6A43EB3932F121E6452"
                BuildableName = "Pods_fakeLekeHomePage.framework"
                BlueprintName = "Pods-fakeLekeHomePage"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7DE5D461E5D2436EC0AA3438468EF7DD"
+            BlueprintIdentifier = "5CD7AAFD40C5C6A43EB3932F121E6452"
             BuildableName = "Pods_fakeLekeHomePage.framework"
             BlueprintName = "Pods-fakeLekeHomePage"
             ReferencedContainer = "container:Pods.xcodeproj">

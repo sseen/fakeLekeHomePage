@@ -12,4 +12,13 @@ target 'fakeLekeHomePage' do
   pod 'RxCocoa', '~> 3.5.0'
   pod 'RxDataSources', '~> 1.0.4'
 
+  pod 'Moya/RxSwift'
+  pod 'SwiftMessages'
+  pod 'FSPagerView'
+  
+  # manual library
+  # CBStoreHouseRefreshControl
+  # PYSearch
+  # JVFloatLabeledTextField
+
 end

@@ -1,24 +1,42 @@
 PODS:
+  - Alamofire (4.5.0)
+  - FSPagerView (0.5.5)
+  - Moya/Core (8.0.5):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - Moya/RxSwift (8.0.5):
+    - Moya/Core
+    - RxSwift (~> 3.0)
+  - Result (3.2.3)
   - RxCocoa (3.5.0):
     - RxSwift (~> 3.4)
   - RxDataSources (1.0.4):
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
   - RxSwift (3.5.0)
+  - SwiftMessages (3.4.0)
   - XLPagerTabStrip (6.0.0)
 
 DEPENDENCIES:
+  - FSPagerView
+  - Moya/RxSwift
   - RxCocoa (~> 3.5.0)
   - RxDataSources (~> 1.0.4)
   - RxSwift (~> 3.5.0)
+  - SwiftMessages
   - XLPagerTabStrip (~> 6.0.0)
 
 SPEC CHECKSUMS:
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  FSPagerView: 3ec72e6b201d77a48adab5ed1d33b43a8cc153d6
+  Moya: c37eec09a098ba9991b5a963b291fc5704bdb9ef
+  Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
   RxDataSources: b3389acc5fe2eefb8fcd81a2b76a876ad08bc82a
   RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
+  SwiftMessages: e20aa1557fde1525ea369361bec4943cc0d08e7c
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: f5a65c04490d15b8b2ec1ad1e53a2d2898865df5
+PODFILE CHECKSUM: 2a12d0670c85224c7659f878a5fb3d764cea6431
 
 COCOAPODS: 1.2.1

@@ -4,7 +4,27 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FSPagerView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Moya.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-fakeLekeHomePage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Result.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -24,6 +44,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftMessages-SwiftMessages.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftMessages.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>XLPagerTabStrip-XLPagerTabStrip.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +67,62 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0A724B3B2E88F336FFDCCBB5FAC111BE</key>
+		<key>025C86423342A67F62949EA012436B7E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0FA9CE3362F55A6C8577E006E9EF56D5</key>
+		<key>2A6D0851BA24DD25864CB23A3A83B9CC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2DFA0DD1B3BAD2E7AEFFBF2FDA7F4231</key>
+		<key>5CD7AAFD40C5C6A43EB3932F121E6452</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>579F403C6F7BE9F1C91942BC6AE9ED5C</key>
+		<key>69C96561648F2E9F9D854066907E69DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7DE5D461E5D2436EC0AA3438468EF7DD</key>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E2E3917248A11132055B034C7E2F4CB4</key>
+		<key>C419A9BCC9AACDC44A26B80764B6B554</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D252398173F1A866EC36488A664EAB55</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DAC669D602C27CA05FE8E00E5F4738ED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA3763460CA9743FEC8A98351652969D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ED279AFE7EA745A57B7B9F35AD5F2C9F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EFDB85DF4827734B35E8A46720ACAEE0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FDFB165D640B494C19C440478B745F0A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
