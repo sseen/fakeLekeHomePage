@@ -8,6 +8,7 @@
 
 import UIKit
 import FSPagerView
+import SDWebImage
 
 class RDHomeCollectionSectionView: UICollectionReusableView,FSPagerViewDataSource,FSPagerViewDelegate {
     var pagerControl: FSPageControl!
@@ -20,6 +21,7 @@ class RDHomeCollectionSectionView: UICollectionReusableView,FSPagerViewDataSourc
         pagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: 120))
         pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
         pagerView.itemSize = .zero
+        pagerView.isInfinite = true
         
         pagerControl = FSPageControl(frame: CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: 20))
         pagerControl.numberOfPages = self.imageNames.count
@@ -46,7 +48,10 @@ class RDHomeCollectionSectionView: UICollectionReusableView,FSPagerViewDataSourc
     
     public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
-        cell.imageView?.image = UIImage(named: self.imageNames[index])
+        cell.imageView?.sd_setImage(with: URL(string: self.imageNames[index]), placeholderImage: UIImage(named:"banner"), options: .refreshCached, completed: { (image, error, tyep, url) in
+            
+        })
+        //UIImage(named: self.imageNames[index])
         cell.imageView?.contentMode = .scaleAspectFill
         cell.imageView?.clipsToBounds = true
         cell.textLabel?.text = index.description+index.description

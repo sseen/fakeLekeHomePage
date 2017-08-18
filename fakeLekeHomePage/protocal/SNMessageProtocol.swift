@@ -19,6 +19,7 @@ enum SNMessageStyle {
     case statusBar
     case underNav
     case card
+    case table
     case floatTop
     case center
 }

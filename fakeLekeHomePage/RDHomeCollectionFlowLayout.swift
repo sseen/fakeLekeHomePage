@@ -56,8 +56,8 @@ class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
     
     func indexPathsHeaderViewsInRect(_ rect:CGRect) -> [IndexPath] {
         var indexPaths:[IndexPath] = []
-        if rect.minY <= RD.CustomCollection.DayHeaderHeight {
-            
+        
+        for _  in 0..<collectionView!.numberOfSections {
             let aIndexPath = IndexPath(item: 0, section: 0)
             indexPaths.append(aIndexPath)
         }

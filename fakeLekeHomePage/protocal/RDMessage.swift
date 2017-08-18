@@ -23,7 +23,7 @@ class RDMessage:SNMessageProtocol {
     }
     
     var defaultStyle: SNMessageStyle {
-        return .card
+        return .table
     }
     
     func showError(content:String) {
@@ -39,6 +39,8 @@ class RDMessage:SNMessageProtocol {
         
         let view: MessageView
         switch style {
+        case .table:
+            view = MessageView.viewFromNib(layout: .TabView)
         case .card:
             view = MessageView.viewFromNib(layout: .CardView)
         case .statusBar:

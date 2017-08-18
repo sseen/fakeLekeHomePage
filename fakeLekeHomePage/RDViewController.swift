@@ -14,9 +14,6 @@ import SwiftMessages
 
 import ObjectMapper
 
-
-typealias NumberSection = AnimatableSectionModel<String, Int>
-
 class RDViewController: UIViewController {
     
     var headerVIewDel:UIView!
@@ -28,11 +25,7 @@ class RDViewController: UIViewController {
     
     var section:RDHomeCollectionSectionView!
     
-    var sections = Variable([NumberSection]())
-    var initialValue: [AnimatableSectionModel<String, Int>] = [
-        NumberSection(model: "section 1", items: [1, 2, 3, 4, 5]),
-        NumberSection(model: "section 2", items: [1, 2, 3, 4, 5])
-    ]
+    var sections = Variable([AnimatableSectionModel<String, RDScrollPageViewModel>]())
     
     
     // MARK: - life cycle
@@ -91,8 +84,8 @@ class RDViewController: UIViewController {
             }.disposed(by: K.Rx.disposeBag)
         
         // rx data
-        self.sections.value = initialValue
-        let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<NumberSection>()
+        // self.sections.value = initialValue
+        let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<AnimatableSectionModel<String, RDScrollPageViewModel>>()
         // cell
         cvReloadDataSource.configureCell = { (datasouce, cv, ip, i) in
             print(datasouce.sectionModels)
@@ -127,8 +120,6 @@ class RDViewController: UIViewController {
         let layout = RDHomeCollectionFlowLayout();
         mainCollection.collectionViewLayout = layout
         
-        RDMessage.showError(content: "ooo")
-        
         RDCommonUnsafeProvider.request(.scrollPageViews)
             .filterSuccessfulStatusCodes()
             .mapJSON()
@@ -136,14 +127,18 @@ class RDViewController: UIViewController {
             .subscribe { event in
             switch event {
             case let .next(response):
-                print("sso \(response)")
-                //let info = Mapper<RDModelBase<RDScrollPageViewModel>>().map(JSONObject: response)
-                self.section.imageNames.removeLast()
+                var array = [String]()
+                for one:RDScrollPageViewModel in response.data! {
+                    guard let str = one.logoPathList else {
+                        continue
+                    }
+                    array.append(str.first!)
+                }
+                self.section.imageNames = array
                 self.section.pagerView.reloadData()
-                //self.sections.value = [NumberSection(model: "section 1", items: [1, 2])]
-                //print(info)
+                
             case let .error(error):
-                RDMessage.showError(content: "ooo")
+                RDMessage.showError(content: error.localizedDescription)
             default:
                 break
             }
@@ -159,7 +154,7 @@ class RDViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.sections.value = [NumberSection(model: "section 1", items: [1, 2])]
+        self.sections.value = [AnimatableSectionModel<String, RDScrollPageViewModel>(model: "section 1", items: [])]
         vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: -RD.CommonUnit.bannerHeight*0.5)
     }
 }

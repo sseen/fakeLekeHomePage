@@ -34,7 +34,7 @@ public enum CommonUnsafe {
 }
 
 extension CommonUnsafe: TargetType {
-    public var baseURL: URL { return URL(string: "http://10.71.33.72:8088/zftal-mobileo")! }
+    public var baseURL: URL { return URL(string: "http://10.71.33.72:8088/zftal-mobile")! }
     public var path: String {
         switch self {
         case .scrollPageViews:
