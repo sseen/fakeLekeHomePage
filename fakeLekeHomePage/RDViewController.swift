@@ -11,6 +11,9 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import SwiftMessages
+import SDWebImage
+import PYSearch
+
 
 import ObjectMapper
 
@@ -31,6 +34,13 @@ class RDViewController: UIViewController {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let searchButton = UIButton(type: .custom)
+        searchButton.frame = CGRect(x: 0, y: 0, width: 170, height: 35)
+        self.navigationItem.titleView = searchButton
+        searchButton.rx.tap
+            .subscribe(onNext: { [weak self] in self?.pushSearchView()})
+            .disposed(by: K.Rx.disposeBag)
         
         self.navigationController?.navigationBar.barStyle = .black
         self.navigationController?.navigationBar.backgroundColor = .white
@@ -90,9 +100,12 @@ class RDViewController: UIViewController {
         cvReloadDataSource.configureCell = { (datasouce, cv, ip, i) in
             print(datasouce.sectionModels)
             
+            let data = datasouce.sectionModels[ip.section].items[ip.row]
             let cell = cv.dequeueReusableCell(withReuseIdentifier: RD.CommonUnit.cellReuse, for: ip) as! RDHomeCollectionViewCell
-            cell.textLabel.text = "\(i)"
-            cell.backgroundColor = UIColor.darkGray
+            cell.imageView.sd_setImage(with: URL(string: data.icon!), placeholderImage: UIImage(named:""), options: .refreshCached, completed: { (image, error, type, url) in
+                
+            })
+            cell.textLabel.text = data.name
             
             return cell
         }
@@ -136,6 +149,22 @@ class RDViewController: UIViewController {
 }
 
 extension RDViewController {
+    func pushSearchView() {
+        // 1. Create an Array of popular search
+        let hotSeaches = ["Java", "Python", "Objective-C", "Swift", "C", "C++", "PHP", "C#", "Perl", "Go", "JavaScript", "R", "Ruby", "MATLAB"];
+        // 2. Create a search view controller
+        let searchViewController = PYSearchViewController(hotSearches: hotSeaches, searchBarPlaceholder: "搜索编程语言") { (vc, bar, text) in
+            
+        }
+        searchViewController?.hotSearchStyle = .normalTag
+        searchViewController?.searchHistoryStyle = .default
+        let nav = UINavigationController(rootViewController: searchViewController!)
+        
+        self.present(nav, animated: true, completion: nil)
+
+    }
+    
+    
     func requestScorllImages(){
         
         RDCommonUnsafeProvider.request(.scrollPageViews)

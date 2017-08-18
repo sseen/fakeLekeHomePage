@@ -20,13 +20,6 @@
 		92201AED1F4593E2000F32BC /* RDRequestAlertPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92201AEC1F4593E2000F32BC /* RDRequestAlertPlugin.swift */; };
 		92201AF01F45B19B000F32BC /* SNMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92201AEF1F45B19B000F32BC /* SNMessageProtocol.swift */; };
 		92201AF21F45B315000F32BC /* RDMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92201AF11F45B315000F32BC /* RDMessage.swift */; };
-		92201B031F466DA4000F32BC /* NSBundle+PYSearchExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201AF61F466DA4000F32BC /* NSBundle+PYSearchExtension.m */; };
-		92201B041F466DA4000F32BC /* PYSearch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 92201AF71F466DA4000F32BC /* PYSearch.bundle */; };
-		92201B051F466DA4000F32BC /* PYSearchConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201AFA1F466DA4000F32BC /* PYSearchConst.m */; };
-		92201B061F466DA4000F32BC /* PYSearchSuggestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201AFC1F466DA4000F32BC /* PYSearchSuggestionViewController.m */; };
-		92201B071F466DA4000F32BC /* PYSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201AFE1F466DA4000F32BC /* PYSearchViewController.m */; };
-		92201B081F466DA4000F32BC /* UIColor+PYSearchExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201B001F466DA4000F32BC /* UIColor+PYSearchExtension.m */; };
-		92201B091F466DA4000F32BC /* UIView+PYSearchExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201B021F466DA4000F32BC /* UIView+PYSearchExtension.m */; };
 		92201B171F466E30000F32BC /* A.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92201B0B1F466E30000F32BC /* A.plist */; };
 		92201B181F466E30000F32BC /* AKTA.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92201B0C1F466E30000F32BC /* AKTA.plist */; };
 		92201B191F466E30000F32BC /* BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201B0E1F466E30000F32BC /* BarItem.m */; };
@@ -69,20 +62,6 @@
 		92201AEC1F4593E2000F32BC /* RDRequestAlertPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDRequestAlertPlugin.swift; sourceTree = "<group>"; };
 		92201AEF1F45B19B000F32BC /* SNMessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNMessageProtocol.swift; sourceTree = "<group>"; };
 		92201AF11F45B315000F32BC /* RDMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDMessage.swift; sourceTree = "<group>"; };
-		92201AF51F466DA4000F32BC /* NSBundle+PYSearchExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+PYSearchExtension.h"; sourceTree = "<group>"; };
-		92201AF61F466DA4000F32BC /* NSBundle+PYSearchExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+PYSearchExtension.m"; sourceTree = "<group>"; };
-		92201AF71F466DA4000F32BC /* PYSearch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PYSearch.bundle; sourceTree = "<group>"; };
-		92201AF81F466DA4000F32BC /* PYSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYSearch.h; sourceTree = "<group>"; };
-		92201AF91F466DA4000F32BC /* PYSearchConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYSearchConst.h; sourceTree = "<group>"; };
-		92201AFA1F466DA4000F32BC /* PYSearchConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYSearchConst.m; sourceTree = "<group>"; };
-		92201AFB1F466DA4000F32BC /* PYSearchSuggestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYSearchSuggestionViewController.h; sourceTree = "<group>"; };
-		92201AFC1F466DA4000F32BC /* PYSearchSuggestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYSearchSuggestionViewController.m; sourceTree = "<group>"; };
-		92201AFD1F466DA4000F32BC /* PYSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYSearchViewController.h; sourceTree = "<group>"; };
-		92201AFE1F466DA4000F32BC /* PYSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYSearchViewController.m; sourceTree = "<group>"; };
-		92201AFF1F466DA4000F32BC /* UIColor+PYSearchExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PYSearchExtension.h"; sourceTree = "<group>"; };
-		92201B001F466DA4000F32BC /* UIColor+PYSearchExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PYSearchExtension.m"; sourceTree = "<group>"; };
-		92201B011F466DA4000F32BC /* UIView+PYSearchExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PYSearchExtension.h"; sourceTree = "<group>"; };
-		92201B021F466DA4000F32BC /* UIView+PYSearchExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PYSearchExtension.m"; sourceTree = "<group>"; };
 		92201B0B1F466E30000F32BC /* A.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = A.plist; sourceTree = "<group>"; };
 		92201B0C1F466E30000F32BC /* AKTA.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AKTA.plist; sourceTree = "<group>"; };
 		92201B0D1F466E30000F32BC /* BarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarItem.h; sourceTree = "<group>"; };
@@ -186,30 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				92201B0A1F466E30000F32BC /* CBStoreHouseRefreshControlPlusVersion */,
-				92201AF41F466DA4000F32BC /* PYSearch */,
 			);
 			path = vendor;
-			sourceTree = "<group>";
-		};
-		92201AF41F466DA4000F32BC /* PYSearch */ = {
-			isa = PBXGroup;
-			children = (
-				92201AF51F466DA4000F32BC /* NSBundle+PYSearchExtension.h */,
-				92201AF61F466DA4000F32BC /* NSBundle+PYSearchExtension.m */,
-				92201AF71F466DA4000F32BC /* PYSearch.bundle */,
-				92201AF81F466DA4000F32BC /* PYSearch.h */,
-				92201AF91F466DA4000F32BC /* PYSearchConst.h */,
-				92201AFA1F466DA4000F32BC /* PYSearchConst.m */,
-				92201AFB1F466DA4000F32BC /* PYSearchSuggestionViewController.h */,
-				92201AFC1F466DA4000F32BC /* PYSearchSuggestionViewController.m */,
-				92201AFD1F466DA4000F32BC /* PYSearchViewController.h */,
-				92201AFE1F466DA4000F32BC /* PYSearchViewController.m */,
-				92201AFF1F466DA4000F32BC /* UIColor+PYSearchExtension.h */,
-				92201B001F466DA4000F32BC /* UIColor+PYSearchExtension.m */,
-				92201B011F466DA4000F32BC /* UIView+PYSearchExtension.h */,
-				92201B021F466DA4000F32BC /* UIView+PYSearchExtension.m */,
-			);
-			path = PYSearch;
 			sourceTree = "<group>";
 		};
 		92201B0A1F466E30000F32BC /* CBStoreHouseRefreshControlPlusVersion */ = {
@@ -364,7 +321,6 @@
 			files = (
 				92201B171F466E30000F32BC /* A.plist in Resources */,
 				92F27C791EB32DD300D98CA8 /* LaunchScreen.storyboard in Resources */,
-				92201B041F466DA4000F32BC /* PYSearch.bundle in Resources */,
 				92201B1D1F466E30000F32BC /* storehouse.plist in Resources */,
 				92F27C761EB32DD300D98CA8 /* Assets.xcassets in Resources */,
 				92F27C741EB32DD300D98CA8 /* Main.storyboard in Resources */,
@@ -429,13 +385,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92201B081F466DA4000F32BC /* UIColor+PYSearchExtension.m in Sources */,
 				92201AE91F458EED000F32BC /* Observable+ObjectMapper.swift in Sources */,
 				92201B1B1F466E30000F32BC /* CBStoreHouseInfinitRefreshControl.m in Sources */,
 				9203FE1E1F0B7B5C0078C76C /* RDUtils.swift in Sources */,
 				92201AE01F4541EE000F32BC /* GitHubAPI.swift in Sources */,
 				92B93C941EE4FC0D002B9A13 /* TestViewController.swift in Sources */,
-				92201B091F466DA4000F32BC /* UIView+PYSearchExtension.m in Sources */,
 				92ACD24C1EB98A0E00AA6FBA /* BannerCollectionReusableView.m in Sources */,
 				92201B211F46AE0F000F32BC /* RDEveryoneAppsModel.swift in Sources */,
 				92F27C6E1EB32DD300D98CA8 /* AppDelegate.m in Sources */,
@@ -444,19 +398,15 @@
 				92FCB95B1EE5055A0051710B /* ChildExampleViewController.swift in Sources */,
 				92201AE41F454C53000F32BC /* RDModelBase.swift in Sources */,
 				92FCB9631EE5078C0051710B /* DataProvider.swift in Sources */,
-				92201B051F466DA4000F32BC /* PYSearchConst.m in Sources */,
 				9203FE1A1F0B76AB0078C76C /* RDHomeCollectionViewCell.swift in Sources */,
-				92201B031F466DA4000F32BC /* NSBundle+PYSearchExtension.m in Sources */,
 				92201AEB1F4591CE000F32BC /* RDCommonViewModel.swift in Sources */,
 				92201AE61F455714000F32BC /* RDScrollPageViewModel.swift in Sources */,
 				92201AE21F454375000F32BC /* RDCommonUnsafeAPI.swift in Sources */,
 				92F8264A1F0F7D8500A85370 /* RDHomeCollectionFlowLayout.swift in Sources */,
 				92201B1A1F466E30000F32BC /* CBHeader.m in Sources */,
-				92201B071F466DA4000F32BC /* PYSearchViewController.m in Sources */,
 				92AA7F451EF134C9009DBE57 /* RDViewController.swift in Sources */,
 				92FCB95E1EE5057B0051710B /* ButtonBarExampleViewController.swift in Sources */,
 				92F27C6B1EB32DD300D98CA8 /* main.m in Sources */,
-				92201B061F466DA4000F32BC /* PYSearchSuggestionViewController.m in Sources */,
 				92201AED1F4593E2000F32BC /* RDRequestAlertPlugin.swift in Sources */,
 				92FCB95C1EE5055A0051710B /* TableChildExampleViewController.swift in Sources */,
 				92ACD2521EB9DFA500AA6FBA /* ChildViewController.m in Sources */,
