@@ -31,19 +31,37 @@ struct K {
 
 struct RD {
     
+    
+    
     enum HomeHeaderState{
         case hided
         case showing
         case partial
     }
-    
+    struct Size  {
+        static let fontSmall:CGFloat = 12
+        static let fontMiddle:CGFloat = 15
+        static let fontLarge:CGFloat = 18
+        
+        static let iconSize:CGFloat = 32
+        static let iconAppSize:CGFloat = 29
+    }
+    struct Color {
+        static let titleBlack = UIColor(hex: 0x484848)
+        static let titleGray = UIColor(hex: 0x929292)
+        static let titleSearchGray = UIColor(hex: 0xb1b1b1)
+        static let bgGray = UIColor(hex: 0xf3f6f9)
+        
+        static let tabBlue = UIColor(hex: 0x4cb2ff)
+        static let tabGray = UIColor(hex: 0xd5e3ed)
+    }
     struct CommonUnit {
         static let marginItem = 20
         static let navPlusStatus:CGFloat = 64
         static let animationTime:TimeInterval = 0.33
         static let delayTime:TimeInterval = 0
-        static let bannerHeight:CGFloat = 120
-        static let bannerPlusIconsHeight:CGFloat = 120 * 2
+        static let bannerHeight:CGFloat = 188
+        static let iconsHeight:CGFloat = 84
         static let navbar_change_point = 50
         static let cellReuse = "cell0"
         static let headerReuse = "headerView"

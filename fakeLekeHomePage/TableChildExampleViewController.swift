@@ -36,6 +36,8 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
     var itemInfo = IndicatorInfo(title: "View")
     var velocity = false
     var delegate : homeScrollDelegate
+    
+    var storeHouseRefreshControl:CBStoreHouseRefreshControl!
 
     init(style: UITableViewStyle, itemInfo: IndicatorInfo, delegate:homeScrollDelegate) {
         self.itemInfo = itemInfo
@@ -59,7 +61,28 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
         tableView.rx.contentOffset.map {$0.y}.subscribe{ [weak self] in
             self?.title = "\($0)"
             }.disposed(by: K.Rx.disposeBag)
+        
+        // refresh
+        self.storeHouseRefreshControl = CBStoreHouseRefreshControl.attach(to: self.view as! UIScrollView!, target: self, refreshAction: #selector(refreshTriggered(_:)), plist: "zf", color: UIColor(white:45/255, alpha:1), lineWidth: 1.5, dropHeight: 40, scale: 1, horizontalRandomness: 150, reverseLoadingAnimation: true, internalAnimationFactor: 0.5)
     }
+    
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.storeHouseRefreshControl.scrollViewDidEndDragging()
+    }
+    
+    
+    func refreshTriggered(_ sender:Any){
+        self.perform(#selector(finishRefreshControl), with: nil, afterDelay: 3, inModes: [RunLoopMode.commonModes])
+    }
+    
+    
+    func finishRefreshControl() {
+        // vc.view.frame = CGRect( origin: CGPoint(x: 0, y: RD.CommonUnit.bannerHeight +  RD.CommonUnit.iconsHeight * iconLines + RD.CommonUnit.navPlusStatus), size:vc.view.frame.size)
+        self.storeHouseRefreshControl.finishingLoading()
+    }
+    
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

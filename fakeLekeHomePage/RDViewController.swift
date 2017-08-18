@@ -25,15 +25,17 @@ class RDViewController: UIViewController {
     var velocity = false
     var upMoveOffset:CGFloat = 0
     var vc:ButtonBarExampleViewController!
-    
     var section:RDHomeCollectionSectionView!
-    
     var sections = Variable([AnimatableSectionModel<String, RDEveryoneAppsModel>]())
+    // app one line or two lines
+    var iconLines:CGFloat = 1
+    // view请求到app应用数量以后的table y起点
     
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         let searchButton = UIButton(type: .custom)
         searchButton.frame = CGRect(x: 0, y: 0, width: 170, height: 35)
@@ -57,16 +59,17 @@ class RDViewController: UIViewController {
         self.headerVIewDel = mainCollection;
         
         vc = ButtonBarExampleViewController(delegate: self)
-        vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: RD.CommonUnit.bannerPlusIconsHeight + RD.CommonUnit.navPlusStatus)
+        vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: RD.CommonUnit.bannerHeight +  RD.CommonUnit.iconsHeight * iconLines + RD.CommonUnit.navPlusStatus)
         self.addChildViewController(vc)
         self.view.addSubview(vc.view)
         vc.didMove(toParentViewController: self)
         
-        let frameHeight = self.vc.view.frame.origin.y
+        // 为了实现滑动轮播图也能达到滑动 table 向上收起的效果
         mainCollection.rx.contentOffset
             .observeOn(MainScheduler.asyncInstance)
             .map { $0.y}
             .subscribe{ [weak self] in
+                // self?.storeHouseRefreshControl.scrollViewDidScroll()
                 
                 let table:UIView = (self?.vc.view)!
                 // scroll up collectionview
@@ -74,7 +77,7 @@ class RDViewController: UIViewController {
                     
                     if $0.element! > CGFloat(0) {
                         UIView.animate(withDuration: RD.CommonUnit.animationTime, delay: RD.CommonUnit.delayTime, options: .curveLinear, animations: {
-                            self?.headerVIewDel.frame = CGRect(x: 0, y: -RD.CommonUnit.bannerPlusIconsHeight, width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
+                            self?.headerVIewDel.frame = CGRect(x: 0, y: -(RD.CommonUnit.bannerHeight +  RD.CommonUnit.iconsHeight * (self?.iconLines)!), width: K.ViewSize.SCREEN_WIDTH, height: K.ViewSize.SCREEN_HEIGHT)
                             table.frame = CGRect(x: 0, y: 64, width: K.ViewSize.SCREEN_WIDTH, height: table.frame.size.height)
                             self?.changeTabStripView(show: true)
                         }, completion: {finished in
@@ -85,13 +88,14 @@ class RDViewController: UIViewController {
                     }
                     // table down
                     if $0.element! < CGFloat(0)  {
-                        var frameDown = self?.vc.view.frame
+                        var frameDown = table.frame
                         self?.navigationController?.navigationBar.alpha = (1 + $0.element!/(44))
-                        frameDown?.origin.y = frameHeight - $0.element!
-                        self?.vc.view.frame = frameDown!
+                        frameDown.origin.y = RD.CommonUnit.navPlusStatus + RD.CommonUnit.bannerHeight + RD.CommonUnit.iconsHeight * (self?.iconLines)! - $0.element!
+                        table.frame = frameDown
                     }
                 }
             }.disposed(by: K.Rx.disposeBag)
+        
         
         // rx data
         // self.sections.value = initialValue
@@ -133,6 +137,9 @@ class RDViewController: UIViewController {
         mainCollection.collectionViewLayout = layout
         
         self.requestEveryoneApps()
+
+        
+
     }
     
     
@@ -143,7 +150,9 @@ class RDViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: -RD.CommonUnit.bannerHeight*0.5)
+        //vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: -RD.CommonUnit.bannerHeight*0.5)
+        
+        
         
     }
 }
@@ -200,7 +209,10 @@ extension RDViewController {
             .subscribe { event in
                 switch event {
                 case let .next(response):
-                    print(response)
+                    if  (response.data?.count)! <= 0 {
+                        self.iconLines = 0
+                        self.vc.view.frame = CGRect(origin: CGPoint(x:0, y:RD.CommonUnit.bannerHeight + RD.CommonUnit.navPlusStatus), size: self.vc.view.frame.size)
+                    }
                     self.sections.value = [AnimatableSectionModel<String, RDEveryoneAppsModel>(model: "section 1", items: response.data!)]
                     self.requestScorllImages()
                 case let .error(error):
@@ -221,10 +233,8 @@ extension RDViewController {
 extension RDViewController:nextHomeScrollDelegate {
     func nextScrollEndDeceleratingWithTable(_ contentOffset: CGPoint, velocity: Bool, table: UIView) {
         let yOffset = contentOffset.y
-        let headerHeight = RD.CommonUnit.bannerPlusIconsHeight
+        let headerHeight = RD.CommonUnit.bannerHeight +  RD.CommonUnit.iconsHeight * iconLines
         let tableHeight = self.view.frame.height
-        
-        print(table.frame)
         
         if isUp != .showing && !velocity {
             if contentOffset.y < 10 {

@@ -265,7 +265,7 @@
 {
     self.state = CBStoreHouseRefreshControlStateDisappearing;
     UIEdgeInsets newInsets = self.scrollView.contentInset;
-    newInsets.top = self.originalTopContentInset;
+    newInsets.top = 0;//self.originalTopContentInset;
     [UIView animateWithDuration:kdisappearDuration animations:^(void) {
         self.scrollView.contentInset = newInsets;
     } completion:^(BOOL finished) {

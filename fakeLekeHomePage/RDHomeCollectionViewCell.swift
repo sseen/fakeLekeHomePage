@@ -15,12 +15,14 @@ class RDHomeCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height*2/3))
+        let iconWidth = RD.Size.iconAppSize
+        imageView = UIImageView(frame: CGRect(x: (frame.size.width-iconWidth)*0.5, y: 20, width: iconWidth, height: iconWidth))
         imageView.contentMode = UIViewContentMode.scaleAspectFit
         contentView.addSubview(imageView)
         
-        textLabel = UILabel(frame: CGRect(x: 0, y: imageView.frame.size.height, width: frame.size.width, height: frame.size.height/3))
-        textLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        textLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height * 0.75, width: frame.size.width, height: frame.size.height * 0.25))
+        textLabel.font = UIFont.systemFont(ofSize: RD.Size.fontSmall)
+        textLabel.textColor = RD.Color.titleBlack
         textLabel.textAlignment = .center
         contentView.addSubview(textLabel)
     }

@@ -38,7 +38,7 @@ class RDHomeCollectionSectionView: UICollectionReusableView,FSPagerViewDataSourc
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        pagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: 120))
+        pagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: RD.CommonUnit.iconsHeight * 2))
         pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
         pagerView.itemSize = .zero
         pagerView.isInfinite = true
