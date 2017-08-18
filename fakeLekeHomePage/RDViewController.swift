@@ -25,7 +25,7 @@ class RDViewController: UIViewController {
     
     var section:RDHomeCollectionSectionView!
     
-    var sections = Variable([AnimatableSectionModel<String, RDScrollPageViewModel>]())
+    var sections = Variable([AnimatableSectionModel<String, RDEveryoneAppsModel>]())
     
     
     // MARK: - life cycle
@@ -85,7 +85,7 @@ class RDViewController: UIViewController {
         
         // rx data
         // self.sections.value = initialValue
-        let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<AnimatableSectionModel<String, RDScrollPageViewModel>>()
+        let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<AnimatableSectionModel<String, RDEveryoneAppsModel>>()
         // cell
         cvReloadDataSource.configureCell = { (datasouce, cv, ip, i) in
             print(datasouce.sectionModels)
@@ -115,35 +115,11 @@ class RDViewController: UIViewController {
             .asObservable().observeOn(MainScheduler.instance)
             .bind(to: mainCollection.rx.items(dataSource: cvReloadDataSource))
             .disposed(by: K.Rx.disposeBag)
-        
-        
+
         let layout = RDHomeCollectionFlowLayout();
         mainCollection.collectionViewLayout = layout
         
-        RDCommonUnsafeProvider.request(.scrollPageViews)
-            .filterSuccessfulStatusCodes()
-            .mapJSON()
-            .mapObject(type: RDModelBase<RDScrollPageViewModel>.self)
-            .subscribe { event in
-            switch event {
-            case let .next(response):
-                var array = [String]()
-                for one:RDScrollPageViewModel in response.data! {
-                    guard let str = one.logoPathList else {
-                        continue
-                    }
-                    array.append(str.first!)
-                }
-                self.section.imageNames = array
-                self.section.pagerView.reloadData()
-                
-            case let .error(error):
-                RDMessage.showError(content: error.localizedDescription)
-            default:
-                break
-            }
-        }
-
+        self.requestEveryoneApps()
     }
     
     
@@ -154,8 +130,60 @@ class RDViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.sections.value = [AnimatableSectionModel<String, RDScrollPageViewModel>(model: "section 1", items: [])]
         vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: -RD.CommonUnit.bannerHeight*0.5)
+        
+    }
+}
+
+extension RDViewController {
+    func requestScorllImages(){
+        
+        RDCommonUnsafeProvider.request(.scrollPageViews)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .mapObject(type: RDModelBase<RDScrollPageViewModel>.self)
+            .subscribe { event in
+                switch event {
+                case let .next(response):
+                    var array = [String]()
+                    for one:RDScrollPageViewModel in response.data! {
+                        guard let str = one.logoPathList else {
+                            continue
+                        }
+                        array.append(str.first!)
+                    }
+                    self.section.imageNames = array
+                    self.section.pagerView.reloadData()
+                    
+                case let .error(error):
+                    RDMessage.showError(content: error.localizedDescription)
+                default:
+                    break
+                }
+        }
+    }
+    
+    func requestEveryoneApps(){
+        RDCommonUnsafeProvider.request(.everyonesApps)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .mapObject(type: RDModelBase<RDEveryoneAppsModel>.self)
+            .subscribe { event in
+                switch event {
+                case let .next(response):
+                    print(response)
+                    self.sections.value = [AnimatableSectionModel<String, RDEveryoneAppsModel>(model: "section 1", items: response.data!)]
+                    self.requestScorllImages()
+                case let .error(error):
+                    RDMessage.showError(content: error.localizedDescription)
+                default:
+                    break
+                }
+        }
+    }
+    
+    func requestMyApps() {
+        
     }
 }
 

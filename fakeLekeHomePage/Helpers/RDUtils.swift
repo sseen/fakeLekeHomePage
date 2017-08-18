@@ -6,6 +6,8 @@
 //  Copyright © 2017年 sseen. All rights reserved.
 //
 import RxSwift
+import YYCache
+
 
 struct K {
     struct NotificationKey {
@@ -53,6 +55,13 @@ struct RD {
         static let DayHeaderHeight = CommonUnit.bannerHeight
         static let HourHeaderWidth = CommonUnit.bannerHeight * 0.5
         static let DaysPerWeek = 4
+    }
+    
+    struct Cache {
+        struct Key {
+            static let scrollImages = "scrollImages"
+        }
+        static let scrollImages = YYCache(name: Key.scrollImages)
     }
 }
 

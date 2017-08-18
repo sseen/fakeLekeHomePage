@@ -9,11 +9,31 @@
 import UIKit
 import FSPagerView
 import SDWebImage
+import YYCache
 
 class RDHomeCollectionSectionView: UICollectionReusableView,FSPagerViewDataSource,FSPagerViewDelegate {
     var pagerControl: FSPageControl!
     var pagerView: FSPagerView!
-    var imageNames = ["banner","banner","banner","banner"]
+    
+    private var _imageNames: [String]!
+    var imageNames:[String]! {
+        get {
+            var array:[String] = []
+            let object = RD.Cache.scrollImages?.object(forKey: RD.Cache.Key.scrollImages)
+            if  nil != object {
+                array = object as! [String]
+            } else {
+                array = ["banner"]
+            }
+            
+            return array
+        }
+        set {
+            _imageNames = newValue
+            RD.Cache.scrollImages?.setObject(newValue as NSCoding, forKey: RD.Cache.Key.scrollImages)
+        }
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,6 +42,7 @@ class RDHomeCollectionSectionView: UICollectionReusableView,FSPagerViewDataSourc
         pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
         pagerView.itemSize = .zero
         pagerView.isInfinite = true
+        pagerView.automaticSlidingInterval = 3.0
         
         pagerControl = FSPageControl(frame: CGRect(x: 0, y: 0, width: K.ViewSize.SCREEN_WIDTH, height: 20))
         pagerControl.numberOfPages = self.imageNames.count

@@ -16,6 +16,8 @@ target 'fakeLekeHomePage' do
   pod 'ObjectMapper', '~> 2.2'
   pod 'SwiftMessages'
   pod 'FSPagerView'
+  
+  pod 'YYCache'
   pod 'SDWebImage', '~> 4.1.0'
   
   # manual library

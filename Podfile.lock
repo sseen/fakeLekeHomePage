@@ -20,6 +20,7 @@ PODS:
   - SDWebImage/Core (4.1.0)
   - SwiftMessages (3.4.0)
   - XLPagerTabStrip (6.0.0)
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - FSPagerView
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - SDWebImage (~> 4.1.0)
   - SwiftMessages
   - XLPagerTabStrip (~> 6.0.0)
+  - YYCache
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -44,7 +46,8 @@ SPEC CHECKSUMS:
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   SwiftMessages: e20aa1557fde1525ea369361bec4943cc0d08e7c
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: b99233ca570b8ac1cbc1f29ae09bf93dffd15351
+PODFILE CHECKSUM: bda0342026a95c0cb69102f8c1bd14c4b45ed424
 
 COCOAPODS: 1.2.1
