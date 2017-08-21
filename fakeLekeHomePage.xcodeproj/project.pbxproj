@@ -20,14 +20,6 @@
 		92201AED1F4593E2000F32BC /* RDRequestAlertPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92201AEC1F4593E2000F32BC /* RDRequestAlertPlugin.swift */; };
 		92201AF01F45B19B000F32BC /* SNMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92201AEF1F45B19B000F32BC /* SNMessageProtocol.swift */; };
 		92201AF21F45B315000F32BC /* RDMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92201AF11F45B315000F32BC /* RDMessage.swift */; };
-		92201B171F466E30000F32BC /* A.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92201B0B1F466E30000F32BC /* A.plist */; };
-		92201B181F466E30000F32BC /* AKTA.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92201B0C1F466E30000F32BC /* AKTA.plist */; };
-		92201B191F466E30000F32BC /* BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201B0E1F466E30000F32BC /* BarItem.m */; };
-		92201B1A1F466E30000F32BC /* CBHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201B101F466E30000F32BC /* CBHeader.m */; };
-		92201B1B1F466E30000F32BC /* CBStoreHouseInfinitRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201B121F466E30000F32BC /* CBStoreHouseInfinitRefreshControl.m */; };
-		92201B1C1F466E30000F32BC /* CBStoreHouseRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 92201B141F466E30000F32BC /* CBStoreHouseRefreshControl.m */; };
-		92201B1D1F466E30000F32BC /* storehouse.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92201B151F466E30000F32BC /* storehouse.plist */; };
-		92201B1E1F466E30000F32BC /* zf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92201B161F466E30000F32BC /* zf.plist */; };
 		92201B211F46AE0F000F32BC /* RDEveryoneAppsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92201B201F46AE0F000F32BC /* RDEveryoneAppsModel.swift */; };
 		92AA7F451EF134C9009DBE57 /* RDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA7F441EF134C9009DBE57 /* RDViewController.swift */; };
 		92ACD24C1EB98A0E00AA6FBA /* BannerCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACD24B1EB98A0E00AA6FBA /* BannerCollectionReusableView.m */; };
@@ -62,18 +54,6 @@
 		92201AEC1F4593E2000F32BC /* RDRequestAlertPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDRequestAlertPlugin.swift; sourceTree = "<group>"; };
 		92201AEF1F45B19B000F32BC /* SNMessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNMessageProtocol.swift; sourceTree = "<group>"; };
 		92201AF11F45B315000F32BC /* RDMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDMessage.swift; sourceTree = "<group>"; };
-		92201B0B1F466E30000F32BC /* A.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = A.plist; sourceTree = "<group>"; };
-		92201B0C1F466E30000F32BC /* AKTA.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AKTA.plist; sourceTree = "<group>"; };
-		92201B0D1F466E30000F32BC /* BarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarItem.h; sourceTree = "<group>"; };
-		92201B0E1F466E30000F32BC /* BarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarItem.m; sourceTree = "<group>"; };
-		92201B0F1F466E30000F32BC /* CBHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBHeader.h; sourceTree = "<group>"; };
-		92201B101F466E30000F32BC /* CBHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHeader.m; sourceTree = "<group>"; };
-		92201B111F466E30000F32BC /* CBStoreHouseInfinitRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBStoreHouseInfinitRefreshControl.h; sourceTree = "<group>"; };
-		92201B121F466E30000F32BC /* CBStoreHouseInfinitRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBStoreHouseInfinitRefreshControl.m; sourceTree = "<group>"; };
-		92201B131F466E30000F32BC /* CBStoreHouseRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBStoreHouseRefreshControl.h; sourceTree = "<group>"; };
-		92201B141F466E30000F32BC /* CBStoreHouseRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBStoreHouseRefreshControl.m; sourceTree = "<group>"; };
-		92201B151F466E30000F32BC /* storehouse.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = storehouse.plist; sourceTree = "<group>"; };
-		92201B161F466E30000F32BC /* zf.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zf.plist; sourceTree = "<group>"; };
 		92201B201F46AE0F000F32BC /* RDEveryoneAppsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDEveryoneAppsModel.swift; sourceTree = "<group>"; };
 		92AA7F441EF134C9009DBE57 /* RDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDViewController.swift; sourceTree = "<group>"; };
 		92ACD24A1EB98A0E00AA6FBA /* BannerCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerCollectionReusableView.h; sourceTree = "<group>"; };
@@ -164,28 +144,8 @@
 		92201AF31F466D9B000F32BC /* vendor */ = {
 			isa = PBXGroup;
 			children = (
-				92201B0A1F466E30000F32BC /* CBStoreHouseRefreshControlPlusVersion */,
 			);
 			path = vendor;
-			sourceTree = "<group>";
-		};
-		92201B0A1F466E30000F32BC /* CBStoreHouseRefreshControlPlusVersion */ = {
-			isa = PBXGroup;
-			children = (
-				92201B0B1F466E30000F32BC /* A.plist */,
-				92201B0C1F466E30000F32BC /* AKTA.plist */,
-				92201B0D1F466E30000F32BC /* BarItem.h */,
-				92201B0E1F466E30000F32BC /* BarItem.m */,
-				92201B0F1F466E30000F32BC /* CBHeader.h */,
-				92201B101F466E30000F32BC /* CBHeader.m */,
-				92201B111F466E30000F32BC /* CBStoreHouseInfinitRefreshControl.h */,
-				92201B121F466E30000F32BC /* CBStoreHouseInfinitRefreshControl.m */,
-				92201B131F466E30000F32BC /* CBStoreHouseRefreshControl.h */,
-				92201B141F466E30000F32BC /* CBStoreHouseRefreshControl.m */,
-				92201B151F466E30000F32BC /* storehouse.plist */,
-				92201B161F466E30000F32BC /* zf.plist */,
-			);
-			path = CBStoreHouseRefreshControlPlusVersion;
 			sourceTree = "<group>";
 		};
 		92F27C5D1EB32DD300D98CA8 = {
@@ -319,13 +279,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92201B171F466E30000F32BC /* A.plist in Resources */,
 				92F27C791EB32DD300D98CA8 /* LaunchScreen.storyboard in Resources */,
-				92201B1D1F466E30000F32BC /* storehouse.plist in Resources */,
 				92F27C761EB32DD300D98CA8 /* Assets.xcassets in Resources */,
 				92F27C741EB32DD300D98CA8 /* Main.storyboard in Resources */,
-				92201B1E1F466E30000F32BC /* zf.plist in Resources */,
-				92201B181F466E30000F32BC /* AKTA.plist in Resources */,
 				92FCB9651EE5078C0051710B /* PostCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,14 +342,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				92201AE91F458EED000F32BC /* Observable+ObjectMapper.swift in Sources */,
-				92201B1B1F466E30000F32BC /* CBStoreHouseInfinitRefreshControl.m in Sources */,
 				9203FE1E1F0B7B5C0078C76C /* RDUtils.swift in Sources */,
 				92201AE01F4541EE000F32BC /* GitHubAPI.swift in Sources */,
 				92B93C941EE4FC0D002B9A13 /* TestViewController.swift in Sources */,
 				92ACD24C1EB98A0E00AA6FBA /* BannerCollectionReusableView.m in Sources */,
 				92201B211F46AE0F000F32BC /* RDEveryoneAppsModel.swift in Sources */,
 				92F27C6E1EB32DD300D98CA8 /* AppDelegate.m in Sources */,
-				92201B1C1F466E30000F32BC /* CBStoreHouseRefreshControl.m in Sources */,
 				92201AF01F45B19B000F32BC /* SNMessageProtocol.swift in Sources */,
 				92FCB95B1EE5055A0051710B /* ChildExampleViewController.swift in Sources */,
 				92201AE41F454C53000F32BC /* RDModelBase.swift in Sources */,
@@ -403,14 +357,12 @@
 				92201AE61F455714000F32BC /* RDScrollPageViewModel.swift in Sources */,
 				92201AE21F454375000F32BC /* RDCommonUnsafeAPI.swift in Sources */,
 				92F8264A1F0F7D8500A85370 /* RDHomeCollectionFlowLayout.swift in Sources */,
-				92201B1A1F466E30000F32BC /* CBHeader.m in Sources */,
 				92AA7F451EF134C9009DBE57 /* RDViewController.swift in Sources */,
 				92FCB95E1EE5057B0051710B /* ButtonBarExampleViewController.swift in Sources */,
 				92F27C6B1EB32DD300D98CA8 /* main.m in Sources */,
 				92201AED1F4593E2000F32BC /* RDRequestAlertPlugin.swift in Sources */,
 				92FCB95C1EE5055A0051710B /* TableChildExampleViewController.swift in Sources */,
 				92ACD2521EB9DFA500AA6FBA /* ChildViewController.m in Sources */,
-				92201B191F466E30000F32BC /* BarItem.m in Sources */,
 				92201AF21F45B315000F32BC /* RDMessage.swift in Sources */,
 				92FCB9641EE5078C0051710B /* PostCell.swift in Sources */,
 				9203FE1C1F0B775A0078C76C /* RDHomeCollectionSectionView.swift in Sources */,
