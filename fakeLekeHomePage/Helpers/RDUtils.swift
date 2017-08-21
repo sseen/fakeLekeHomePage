@@ -70,9 +70,9 @@ struct RD {
     }
     
     struct CustomCollection {
-        static let DayHeaderHeight = CommonUnit.bannerHeight
-        static let HourHeaderWidth = CommonUnit.bannerHeight * 0.5
-        static let DaysPerWeek = 4
+        static let DayHeaderHeight = CommonUnit.iconsHeight * 2
+        static let HourHeaderWidth = CommonUnit.iconsHeight
+        static let DaysPerWeek = 5
     }
     
     struct Cache {

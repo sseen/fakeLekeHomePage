@@ -32,7 +32,7 @@ class RDHomeCollectionFlowLayout: UICollectionViewFlowLayout {
         for attributes in attributesArray ?? [] {
             let aIndex = attributes.indexPath
             attributes.frame = CGRect(x: (self.itemWidth() + 1 ) * (CGFloat)(attributes.indexPath.item % 4) ,
-                                      y: RD.CustomCollection.HourHeaderWidth * (CGFloat)(2 + aIndex.item / 4) + CGFloat(aIndex.item / 4),
+                                      y: RD.CustomCollection.HourHeaderWidth * (CGFloat)(aIndex.item / 4) + CGFloat(aIndex.item / 4) + RD.CommonUnit.bannerHeight,
                                       width: self.itemWidth(),
                                       height: RD.CustomCollection.HourHeaderWidth)
             
