@@ -20,8 +20,8 @@ class RDHomeCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = UIViewContentMode.scaleAspectFit
         contentView.addSubview(imageView)
         
-        textLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height * 0.75, width: frame.size.width, height: frame.size.height * 0.25))
-        textLabel.font = UIFont.systemFont(ofSize: RD.Size.fontSmall)
+        textLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height * 0.75 - 10, width: frame.size.width, height: frame.size.height * 0.25))
+        textLabel.font = UIFont(custSize: .fontSmall)
         textLabel.textColor = RD.Color.titleBlack
         textLabel.textAlignment = .center
         contentView.addSubview(textLabel)

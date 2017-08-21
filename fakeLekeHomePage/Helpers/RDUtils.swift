@@ -8,7 +8,6 @@
 import RxSwift
 import YYCache
 
-
 struct K {
     struct NotificationKey {
         static let Welcome = "kWelcomeNotif"
@@ -31,21 +30,17 @@ struct K {
 
 struct RD {
     
-    
-    
     enum HomeHeaderState{
         case hided
         case showing
         case partial
     }
     struct Size  {
-        static let fontSmall:CGFloat = 12
-        static let fontMiddle:CGFloat = 15
-        static let fontLarge:CGFloat = 18
         
         static let iconSize:CGFloat = 32
         static let iconAppSize:CGFloat = 29
     }
+    
     struct Color {
         static let titleBlack = UIColor(hex: 0x484848)
         static let titleGray = UIColor(hex: 0x929292)
@@ -96,6 +91,27 @@ extension UIColor {
             green: CGFloat((hex >> 8) & 0xff) / 255,
             blue: CGFloat(hex & 0xff) / 255,
             alpha: CGFloat(alpha))
+    }
+}
+
+extension UIFont {
+    enum Size:CGFloat  {
+        case  fontSmall = 12
+        case  fontMiddle = 15
+        case  fontLarge = 18
+    }
+    
+    enum CustomFont: String {
+        case Avenir = "Avenir"
+        case Lato = "Lato"
+        case System = ".PingFangSC-Medium" //SFUIText
+        case SystemRegular = ".PingFangSC-Regular"
+    }
+    convenience init (custSize:Size){
+        self.init(.System, size: custSize)
+    }
+    convenience init(_ customName:CustomFont, size:Size) {
+        self.init(name: customName.rawValue, size: size.rawValue)!
     }
 }
 

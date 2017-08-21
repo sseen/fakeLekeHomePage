@@ -4,6 +4,4 @@
 
 #import "BannerCollectionReusableView.h"
 #import "ChildViewController.h"
-#import "CBStoreHouseRefreshControl.h"
-#import "CBStoreHouseInfinitRefreshControl.h"
 

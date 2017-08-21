@@ -31,13 +31,11 @@ protocol homeScrollDelegate {
 
 class TableChildExampleViewController: UITableViewController, IndicatorInfoProvider {
 
-    let cellIdentifier = "postCell"
+    let cellIdentifier = "RDHomeDayThingsTableViewCell"
     var blackTheme = false
     var itemInfo = IndicatorInfo(title: "View")
     var velocity = false
     var delegate : homeScrollDelegate
-    
-    var storeHouseRefreshControl:CBStoreHouseRefreshControl!
 
     init(style: UITableViewStyle, itemInfo: IndicatorInfo, delegate:homeScrollDelegate) {
         self.itemInfo = itemInfo
@@ -51,9 +49,10 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "PostCell", bundle: Bundle.main), forCellReuseIdentifier: cellIdentifier)
+        tableView.register(UINib(nibName: cellIdentifier, bundle: Bundle.main), forCellReuseIdentifier: cellIdentifier)
         tableView.estimatedRowHeight = 60.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = 117
+        tableView.separatorStyle = .none
         if blackTheme {
             tableView.backgroundColor = UIColor(red: 15/255.0, green: 16/255.0, blue: 16/255.0, alpha: 1.0)
         }
@@ -75,17 +74,18 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataProvider.sharedInstance.postsData.count
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PostCell,
-            let data = DataProvider.sharedInstance.postsData.object(at: indexPath.row) as? NSDictionary else { return PostCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RDHomeDayThingsTableViewCell,
+            let _ = DataProvider.sharedInstance.postsData.object(at: indexPath.row) as? NSDictionary else { return RDHomeDayThingsTableViewCell() }
 
-        cell.configureWithData(data)
-        if blackTheme {
-            cell.changeStylToBlack()
-        }
+        cell.lblTitle.text = "我的日程"
+        cell.lblSubTitle.text = "安全教育研讨会"
+        cell.lblTime.text = "08:00"
+        cell.lblSubTime.text = "14:30-16:30"
+        cell.lblSubAddress.text = "行政楼"
         return cell
     }
     

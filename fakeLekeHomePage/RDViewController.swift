@@ -39,6 +39,7 @@ class RDViewController: UIViewController {
         
 
         let searchButton = UIButton(type: .custom)
+        searchButton.setImage(UIImage(named:"search"), for: .normal)
         searchButton.frame = CGRect(x: 0, y: 0, width: 170, height: 35)
         self.navigationItem.titleView = searchButton
         searchButton.rx.tap
