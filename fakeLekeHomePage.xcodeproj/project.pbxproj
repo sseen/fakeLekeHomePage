@@ -243,10 +243,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92F27C7D1EB32DD300D98CA8 /* Build configuration list for PBXNativeTarget "fakeLekeHomePage" */;
 			buildPhases = (
-				EB2C4CEFA5C9C8A8C2762F09 /* [CP] Check Pods Manifest.lock */,
 				92F27C621EB32DD300D98CA8 /* Sources */,
 				92F27C631EB32DD300D98CA8 /* Frameworks */,
 				92F27C641EB32DD300D98CA8 /* Resources */,
+				EB2C4CEFA5C9C8A8C2762F09 /* [CP] Check Pods Manifest.lock */,
 				AEFFD6A7A2B0E7B9BC3B0DB5 /* [CP] Embed Pods Frameworks */,
 				77C7B50E526E6FB974CACCDF /* [CP] Copy Pods Resources */,
 			);

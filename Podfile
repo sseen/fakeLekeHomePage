@@ -18,8 +18,8 @@ target 'fakeLekeHomePage' do
   pod 'FSPagerView'
   
   pod 'YYCache'
-  pod 'SDWebImage', '~> 4.1.0'
   pod 'PYSearch'
+  pod 'SDWebImage', '~> 4.1.0'
   
   # manual library
   # CBStoreHouseRefreshControl

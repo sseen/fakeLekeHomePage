@@ -153,9 +153,7 @@ class RDViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //vc.view.frame = vc.view.frame.offsetBy(dx: 0, dy: -RD.CommonUnit.bannerHeight*0.5)
-        
-        
-        
+    
     }
 }
 
@@ -178,7 +176,6 @@ extension RDViewController {
     
     func requestScorllImages(){
         
-                
         RDCommonUnsafeProvider.request(.scrollPageViews)
             .filterSuccessfulStatusCodes()
             .mapJSON()
@@ -205,6 +202,28 @@ extension RDViewController {
     }
     
     func requestEveryoneApps(){
+        
+        let endpointClosure = { (target: CommonUnsafe) -> Endpoint<CommonUnsafe> in
+            let url2 = url(target)
+            return Endpoint(url: url2, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+        }
+        // let provider = MoyaProvider(endpointClosure: endpointClosure)
+        let provider = MoyaProvider(stubClosure: MoyaProvider<CommonUnsafe>.immediatelyStub)
+        provider.request(.scrollPageViews) { (result) in
+            switch result {
+            case let .success(moyaResponse):
+                let data = moyaResponse.data
+                let statusCode = moyaResponse.statusCode
+            // do something with the response data or statusCode
+            case let .failure(error): break
+                // this means there was a network failure - either the request
+                // wasn't sent (connectivity), or no response was received (server
+                // timed out).  If the server responds with a 4xx or 5xx error, that
+                // will be sent as a ".success"-ful response.
+            }
+        }
+
+        
         RDCommonUnsafeProvider.request(.everyonesApps)
             .filterSuccessfulStatusCodes()
             .mapJSON()
